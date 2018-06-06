@@ -1,31 +1,33 @@
 $(document).ready(function() {
-    console.log( "ready!" );
+    // console.log( "ready!" );
 
 queue()
     .defer(d3.csv, "assets/data/whiskey-insight.csv")
     .await(getCountryData);
 
-var element = document.getElementById("world-map");
-console.log(element);
+// var element = document.getElementById("world-map");
+// console.log(element);
 
-var countries = new Set();
+// var countries = new Set();
 
 var whiskeyBubbles = new Object();
 
 function getCountryData(error, whiskeyData) {
     for (i = 0; i < whiskeyData.length; i++) {
+      
         // console.log(whiskeyData[i]["Country"]);
+        
         if (whiskeyData[i]["Country"] in whiskeyBubbles) {
             whiskeyBubbles[whiskeyData[i]["Country"]]++
         } else {
-            whiskeyBubbles[whiskeyData[i]["Country"]] = 0;
+            whiskeyBubbles[whiskeyData[i]["Country"]] = 1;
         }
-        countries.add(whiskeyData[i]["Country"]);
+        // countries.add(whiskeyData[i]["Country"]);
     }
     
     console.log(whiskeyBubbles);
     
-    countries = Array.from(countries);
+    // countries = Array.from(countries);
     // console.log(countries);
     
     // for (i = 0; i < countries.length; i++) {
@@ -37,7 +39,7 @@ var bubble_map = new Datamap({
   element: document.getElementById("world-map"),
   geographyConfig: {
     popupOnHover: false,
-    highlightOnHover: false
+    highlightOnHover: true
   },
   fills: {
     defaultFill: '#ff794d',
@@ -105,7 +107,7 @@ bubble_map.bubbles([
   }
 ], {
   popupTemplate: function(geo, data) {
-    return '<div class="hoverinfo">Botles Reviewed:' + data.yield + '';
+    return '<div class="hoverinfo">Botles Reviewed:' + data.yeild + '';
 // Exploded on ' + data.date + ' by the '  + data.country + ''
   }
 });
