@@ -19,229 +19,272 @@ function getCountryData(error, whiskeyData) {
         
         if (whiskeyData[i]["Country"] in whiskeyBubbles) {
             whiskeyBubbles[whiskeyData[i]["Country"]]++
-            whiskeyTotal++
+            whiskeyTotal++;
         } else {
             whiskeyBubbles[whiskeyData[i]["Country"]] = 1;
-            whiskeyTotal++
+            whiskeyTotal++;
         }
     }
     
-    console.log(whiskeyBubbles);
+    // console.log(whiskeyBubbles);
     
-    console.log(whiskeyTotal);
+    // console.log(whiskeyTotal);
     
   // Below, we start to create the individual bubbles
 
-var bubble_map = new Datamap({
-  element: document.getElementById("world-map"),
-  geographyConfig: {
-    popupOnHover: false,
-    highlightOnHover: true
-  },
-  fills: {
-    defaultFill: '#ff794d',
-    BEL: 'yellow',
-    CAN: 'purple',
-    GBR: 'red',
-    FIN: 'black',
-    FRA: 'pink',
-    IND: 'brown',
-    IRL: 'green',
-    JPN: 'orange',
-    NLD: 'crimson',
-    ZAF: 'cyan',
-    SWE: 'darkgreen',
-    CHE: 'gold',
-    TWN: 'indigo',
-    AUS: 'lime',
-    USA: 'blue'
+  var bubble_map = new Datamap({
+    element: document.getElementById("world-map"),
+    geographyConfig: {
+      popupOnHover: false,
+      highlightOnHover: true
+    },
+    fills: {
+      defaultFill: '#ff794d',
+      BEL: 'red',
+      CAN: 'purple',
+      GBR: 'khaki',
+      FIN: 'black',
+      FRA: 'pink',
+      IND: 'brown',
+      IRL: 'green',
+      JPN: 'orange',
+      NLD: 'crimson',
+      SCT: 'hotPink',
+      ZAF: 'cyan',
+      SWE: 'darkgreen',
+      CHE: 'gold',
+      TWN: 'indigo',
+      AUS: 'lime',
+      USA: 'blue',
+      WLS: 'teal'
+    }
+  });
+  
+  // To calculate the radius, I've done a rule of three to help me scale them up 
+  // because otherwise the bigger radius would make the chart impossible to read
+  
+  function calculateradius(countryTotal) {
+    return countryTotal*100/whiskeyTotal;
   }
-});
+  
+  bubble_map.bubbles([
+    {
+      name: 'Belgium',
+      radius: calculateradius(whiskeyBubbles["Belgium"]),
+      centered: 'BEL',
+      bottles: whiskeyBubbles["Belgium"],
+      country: 'BEL',
+      fillKey: 'BEL',
+    },{
+      name: 'Canada',
+      radius: calculateradius(whiskeyBubbles["Canada"]),
+      centered: 'CAN',
+      bottles: whiskeyBubbles["Canada"],
+      country: 'CAN',
+      fillKey: 'CAN',
+    },{
+      name: 'England',
+      radius: calculateradius(whiskeyBubbles["England"]),
+      // centered: 'GBR',
+      bottles: whiskeyBubbles["England"],
+      country: 'GBR',
+      fillKey: 'GBR',
+      latitude: 51.50,
+      longitude: 0.12,
+    },{
+      name: 'Finland',
+      radius: calculateradius(whiskeyBubbles["Finland"]),
+      centered: 'FIN',
+      bottles: whiskeyBubbles["Finland"],
+      country: 'FIN',
+      fillKey: 'FIN',
+    },{
+      name: 'France',
+      radius: calculateradius(whiskeyBubbles["France"]),
+      centered: 'FRA',
+      bottles: whiskeyBubbles["France"],
+      country: 'FRA',
+      fillKey: 'FRA',
+    },{
+      name: 'India',
+      radius: calculateradius(whiskeyBubbles["India"]),
+      centered: 'IND',
+      bottles: whiskeyBubbles["India"],
+      country: 'IND',
+      fillKey: 'IND',
+    },{
+      name: 'Ireland',
+      radius: calculateradius(whiskeyBubbles["Ireland"]),
+      centered: 'IRL',
+      bottles: whiskeyBubbles["Ireland"],
+      country: 'IRL',
+      fillKey: 'IRL',
+    },{
+      name: 'Japan',
+      radius: calculateradius(whiskeyBubbles["Japan"]),
+      centered: 'JPN',
+      bottles: whiskeyBubbles["Japan"],
+      country: 'JPN',
+      fillKey: 'JPN',
+    },{
+      name: 'Netherlands',
+      radius: calculateradius(whiskeyBubbles["Netherlands"]),
+      centered: 'NLD',
+      bottles: whiskeyBubbles["Netherlands"],
+      country: 'NLD',
+      fillKey: 'NLD',
+    },{
+      name: 'Scotland',
+      radius: calculateradius(whiskeyBubbles["Scotland"]),
+      // centered: 'SCT',
+      bottles: whiskeyBubbles["Scotland"],
+      country: 'SCT',
+      fillKey: 'SCT',
+      latitude: 55.95,
+      longitude: -3.18,
+    },{
+      name: 'South Africa',
+      radius: calculateradius(whiskeyBubbles["South Africa"]),
+      centered: 'ZAF',
+      bottles: whiskeyBubbles["South Africa"],
+      country: 'ZAF',
+      fillKey: 'ZAF',
+    },{
+      name: 'Sweden',
+      radius: calculateradius(whiskeyBubbles["Sweden"]),
+      centered: 'SWE',
+      bottles: whiskeyBubbles["Sweden"],
+      country: 'SWE',
+      fillKey: 'SWE',
+    },{
+      name: 'Switzerland',
+      radius: calculateradius(whiskeyBubbles["Switzerland"]),
+      centered: 'CHE',
+      bottles: whiskeyBubbles["Switzerland"],
+      country: 'CHE',
+      fillKey: 'CHE',
+    },{
+      name: 'Taiwan',
+      radius: calculateradius(whiskeyBubbles["Taiwan"]),
+      centered: 'TWN',
+      bottles: whiskeyBubbles["Taiwan"],
+      country: 'TWN',
+      fillKey: 'TWN',
+    },{
+      name: 'Australia (Tasmania)',
+      radius: calculateradius(whiskeyBubbles["Tasmania"]),
+      // centered: 'AUS',
+      bottles: whiskeyBubbles["Tasmania"],
+      country: 'AUS',
+      fillKey: 'AUS',
+      latitude: -41.45,
+      longitude: 145.97,
+    },{
+      name: 'USA',
+      radius: calculateradius(whiskeyBubbles["USA"]),
+      centered: 'USA',
+      bottles: whiskeyBubbles["USA"],
+      country: 'USA',
+      fillKey: 'USA',
+    },{
+      name: 'Wales',
+      radius: calculateradius(whiskeyBubbles["Wales"]),
+      // centered: 'WLS',
+      bottles: whiskeyBubbles["Wales"],
+      country: 'WLS',
+      fillKey: 'WLS',
+      latitude: 52.13,
+      longitude: -3.78,
+    }
+  ], {
+    popupTemplate: function(geo, data) {
+      return '<div class="hoverinfo">Botles Reviewed: ' + data.bottles;
+    }
+  });
+  
+  // Now that the bubblechart is sorted, I'll work on the rest of the graphs
 
-// To calculate the radious, I've done a rule of three to help me scale them up 
-// because otherwise the bigger radious would make the chart impossible to read
-
-function calculateRadious(countryTotal) {
-  return countryTotal*100/whiskeyTotal;
-}
-
-bubble_map.bubbles([
-  {
-    name: 'Belgium',
-    radius: calculateRadious(whiskeyBubbles["Belgium"]),
-    centered: 'BEL',
-    country: 'BEL',
-    yeild: 0,
-    fillKey: 'BEL',
-    // latitude: 50.8503,
-    // longitude: 4.3517
-  },{
-    name: 'Canada',
-    radius: calculateRadious(whiskeyBubbles["Canada"]),
-    centered: 'CAN',
-    country: 'CAN',
-    yeild: 0,
-    fillKey: 'CAN',
-    // latitude: 43.6532,
-    // longitude: 79.3832
-  },{
-    name: 'England',
-    radius: calculateRadious(whiskeyBubbles["England"]),
-    centered: 'GBR',
-    country: 'GBR',
-    yeild: 0,
-    fillKey: 'GBR',
-    // latitude: 55.9533,
-    // longitude: 3.1883
-  },{
-    name: 'Finland',
-    radius: calculateRadious(whiskeyBubbles["Finland"]),
-    centered: 'FIN',
-    country: 'FIN',
-    yeild: 0,
-    fillKey: 'FIN',
-    // latitude: 61.9241,
-    // longitude: 25.7482 
-  },{
-    name: 'France',
-    radius: calculateRadious(whiskeyBubbles["France"]),
-    centered: 'FRA',
-    yeild: 50000,
-    country: 'FRA',
-    fillKey: 'FRA',
-    // latitude: 48.8566,
-    // longitude: 2.3522
-  },{
-    name: 'India',
-    radius: calculateRadious(whiskeyBubbles["India"]),
-    centered: 'IND',
-    yeild: 50000,
-    country: 'IND',
-    fillKey: 'IND',
-    // latitude: 20.5937,
-    // longitude: 78.9629
-  },{
-    name: 'Ireland',
-    radius: calculateRadious(whiskeyBubbles["Ireland"]),
-    centered: 'IRL',
-    yeild: 50000,
-    country: 'IRL',
-    fillKey: 'IRL',
-    // latitude: 53.1424,
-    // longitude: 7.6921
-  },{
-    name: 'Japan',
-    radius: calculateRadious(whiskeyBubbles["Japan"]),
-    centered: 'JPN',
-    yeild: 50000,
-    country: 'JPN',
-    fillKey: 'JPN',
-    // latitude: 36.2048,
-    // longitude: 138.2529
-  },{
-    name: 'Netherlands',
-    radius: calculateRadious(whiskeyBubbles["Netherlands"]),
-    centered: 'NLD',
-    yeild: 50000,
-    country: 'NLD',
-    fillKey: 'NLD',
-    // latitude: 52.1326,
-    // longitude: 5.2913
-  },{
-    name: 'Scotland',
-    radius: calculateRadious(whiskeyBubbles["Scotland"]),
-    centered: 'GBR',
-    country: 'GBR',
-    yeild: 0,
-    fillKey: 'GBR',
-    // latitude: 55.9533,
-    // longitude: 3.1883
-  },{
-    name: 'South Africa',
-    radius: calculateRadious(whiskeyBubbles["South Africa"]),
-    centered: 'ZAF',
-    yeild: 50000,
-    country: 'ZAF',
-    fillKey: 'ZAF',
-    // latitude: 30.5595,
-    // longitude: 22.9375
-  },{
-    name: 'Sweden',
-    radius: calculateRadious(whiskeyBubbles["Sweden"]),
-    centered: 'SWE',
-    yeild: 50000,
-    country: 'SWE',
-    fillKey: 'SWE',
-    // latitude: 60.1282,
-    // longitude: 18.6435
-  },{
-    name: 'Switzerland',
-    radius: calculateRadious(whiskeyBubbles["Switzerland"]),
-    centered: 'CHE',
-    yeild: 50000,
-    country: 'CHE',
-    fillKey: 'CHE',
-    // latitude: 46.818,
-    // longitude: 8.2275
-  },{
-    name: 'Taiwan',
-    radius: calculateRadious(whiskeyBubbles["Taiwan"]),
-    centered: 'TWN',
-    yeild: 50000,
-    country: 'TWN',
-    fillKey: 'TWN',
-    // latitude: 23.6978,
-    // longitude: 20.9605
-  },{
-    name: 'Australia (Tasmania)',
-    radius: calculateRadious(whiskeyBubbles["Tasmania"])*20,
-    centered: 'AUS',
-    yeild: 50000,
-    country: 'AUS',
-    fillKey: 'AUS',
-    // latitude: 41.4545,
-    // longitude: 145.9707
-  },{
-    name: 'USA',
-    radius: calculateRadious(whiskeyBubbles["USA"]),
-    centered: 'USA',
-    yeild: 50000,
-    country: 'USA',
-    fillKey: 'USA',
-    // latitude: 41.8781,
-    // longitude: 87.6298
-  },{
-    name: 'Wales',
-    radius: calculateRadious(whiskeyBubbles["Wales"]),
-    centered: 'GBR',
-    yeild: 50000,
-    country: 'GBR',
-    fillKey: 'GBR',
-    // latitude: 52.1307,
-    // longitude: 3.7837
-  }
-], {
-  popupTemplate: function(geo, data) {
-    return '<div class="hoverinfo">Botles Reviewed:' + data.yeild + '';
-// Exploded on ' + data.date + ' by the '  + data.country + ''
-  }
-});
+  var ndx = crossfilter(whiskeyData);
+  
+  // Because my numeric values are strings in whiskeyData, 
+  // I need to turn them into numbers
+  
+  whiskeyData.forEach(function(d){
+        d.MetaCritic = parseFloat(d.MetaCritic);
+        d.STDEV = parseFloat(d.STDEV);
+        d.Reviews = parseInt(d.Reviews);
+    });
+  
+  // Below, a call to all the functions I'll need
+  
+  showPreferredFlavourProfiles(ndx);
+  
+  dc.renderAll();
 
 }
 
+function showPreferredFlavourProfiles(ndx) {
+  
+  var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
+  var averageRatingByCluster = flavourProfileDim.group().reduce(
+    function (p, v) {
+      p.count++;
+      p.total += v.MetaCritic;
+      return p;
+    },
+    function (p, v) {
+      p.count--;
+      if (p.count == 0) {
+        p.total = 0;
+      } else {
+        p.total -= v.MetaCritic;
+      }
+      return p;
+    },
+    function () {
+      return {count: 0, total: 0};
+    }
+  );
+  
+  
+  // PENDING - There is a bar at the start that shows data for whiskeys 
+  // with an empty "Cluster" sell. I want to make my code ignore those samples.
+  // PENDING - Add colour to the bars
+  // PENDING - Add infomration on what does each cluster mean
+  
+  dc.barChart("#preferred-flavour-profile")
+    .width(850)
+    .height(350)
+    .margins({top: 10, right: 50, bottom: 30, left: 50})
+    .dimension(flavourProfileDim)
+    .group(averageRatingByCluster)
+    .valueAccessor(function (d) {
+        if (d.value.count == 0) {
+            return 0;
+        } else {
+            return d.value.total / d.value.count;
+        }
+    })
+    .transitionDuration(500)
+    .x(d3.scale.ordinal())
+    .xUnits(dc.units.ordinal)
+    .elasticY(true)
+    .xAxisLabel("x axis")
+    .yAxis().ticks(10);
+  }
+// }
 
-// PENDING - Pass the radius into our chart (create five different sizes according to the value on whiskeyBubbles per country)
-// PENDING - Get the coordinates right
-// PENDING - Get the content for the hover tag to say how many bottles reviewd per country
+// function showPreferredFlavourProfiles(ndx);
 
+// // After getting the map and the bubbles, it's time to write the other graphs
 
 
 // function makeGraphs(error, whiskeyData) {
     
 //     var ndx = crossfilter(whiskeyData);
 
-    
-//     whiskey_per_country(ndx, whiskeyData);
+  
+//     whiskeyPerCountry(ndx, whiskeyData);
     
 //     dc.renderAll()
 // }
@@ -250,13 +293,13 @@ bubble_map.bubbles([
 
 // // Pie chart below
 
-// function whiskey_per_country(ndx) {
+// function whiskeyPerCountry(ndx) {
 //     var countryDim = ndx.dimension(function (d) {
 //         return d["Country"];
 //     });
-//      var whiskeyPerCountryGroup = countryDim.group();
+//       var whiskeyPerCountryGroup = countryDim.group();
 
-//     var pieChart = dc.pieChart("#whiskey-per-country-bubble-chart-overlay");
+//     var pieChart = dc.pieChart("#preferred-flavour-profile");
 
 //     pieChart
 //         .height(400)
