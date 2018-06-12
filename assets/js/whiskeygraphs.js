@@ -26,7 +26,7 @@ function getCountryData(error, whiskeyData) {
         }
     }
     
-    // console.log(whiskeyBubbles);
+    console.log(whiskeyBubbles);
     
     // console.log(whiskeyTotal);
     
@@ -218,6 +218,7 @@ function getCountryData(error, whiskeyData) {
   // Below, a call to all the functions I'll need
   
   showPreferredFlavourProfiles(ndx);
+  showMostDivisiveWhiskeys(ndx);
   
   dc.renderAll();
 
@@ -250,8 +251,12 @@ function showPreferredFlavourProfiles(ndx) {
   // PENDING - There is a bar at the start that shows data for whiskeys 
   // with an empty "Cluster" sell. I want to make my code ignore those samples.
   // PENDING - Add colour to the bars
-  // PENDING - Add infomration on what does each cluster mean
+  // PENDING - Add information on what does each cluster mean
   
+  // var minRating = 0;
+  // var maxRating = 10;
+  
+
   dc.barChart("#preferred-flavour-profile")
     .width(850)
     .height(350)
@@ -259,60 +264,74 @@ function showPreferredFlavourProfiles(ndx) {
     .dimension(flavourProfileDim)
     .group(averageRatingByCluster)
     .valueAccessor(function (d) {
+      
+        var valueAverage = d.value.total / d.value.count;
+      
         if (d.value.count == 0) {
             return 0;
         } else {
-            return d.value.total / d.value.count;
+            return valueAverage.toFixed(2);
         }
     })
     .transitionDuration(500)
     .x(d3.scale.ordinal())
     .xUnits(dc.units.ordinal)
     .elasticY(true)
-    .xAxisLabel("x axis")
-    .yAxis().ticks(10);
+    .xAxisLabel("Different Clusters (Sets of Flavour Profiles)")
+    .yAxisLabel("Ratings from 0 to 10 Points")
+    .yAxis().ticks(4);
   }
-// }
-
-// function showPreferredFlavourProfiles(ndx);
-
-// // After getting the map and the bubbles, it's time to write the other graphs
-
-
-// function makeGraphs(error, whiskeyData) {
-    
-//     var ndx = crossfilter(whiskeyData);
-
   
-//     whiskeyPerCountry(ndx, whiskeyData);
+  
+  // Trying to get the data from STDEV to show when console.log - START
+  //  Copied the formula to get whiskeyBubbles because when trying to work on the
+  // heat map, I don't seem to be able to access the "STDEV" nor the "Whisky"
+  // columns
+  
+  var whiskeyDeviation = new Object();
+
+  var whiskeyTest = 0;
+
+  function getDeviationData(error, whiskeyData) {
+    for (i = 0; i < whiskeyData.length; i++) {
+      if (whiskeyData[i]["STDEV"] in whiskeyDeviation) {
+          whiskeyDeviation[whiskeyData[i]["STDEV"]]++
+          whiskeyTest++;
+      } else {
+          whiskeyDeviation[whiskeyData[i]["STDEV"]] = 1;
+          whiskeyTest++;
+      }
+    }
+  }
+  
+  console.log(whiskeyDeviation);
+  // Trying to get the data from STDEV to show when console.log - END
+  
+
+  function showMostDivisiveWhiskeys(ndx) {
     
-//     dc.renderAll()
-// }
+    var divisiveWhiskeysDim = ndx.dimension(dc.pluck("STDEV"));
+    var divisiveWhiskeysGroup = divisiveWhiskeysDim.group().reduceSum(
+      dc.pluck("Whisky"));
+    
+    // Time to draw or chart - a Heat Map highlighting the top 100 most
+    // divisive whiskeys from the sample
+    
+    dc.heatMap("#most-divisive-whiskeys")
+    .width(40 * 20 + 80)
+    .height(40 * 5 + 40)
+    .margins({top: 10, right: 50, bottom: 30, left: 50})
+    .dimension(divisiveWhiskeysDim)
+    .group(divisiveWhiskeysGroup)
+    .keyAccessor(function(d) { return +d.key[0]; })
+    .valueAccessor(function(d) { return +d.key[1]; })
+    .colorAccessor(function(d) { return +d.value; })
+    .title(function(d) {
+        return  "Whiskey's Name: "+ "\n" +
+                "Sandard Deviation: ";})
+    .colors(["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"])
+    .calculateColorDomain();
 
-
-
-// // Pie chart below
-
-// function whiskeyPerCountry(ndx) {
-//     var countryDim = ndx.dimension(function (d) {
-//         return d["Country"];
-//     });
-//       var whiskeyPerCountryGroup = countryDim.group();
-
-//     var pieChart = dc.pieChart("#preferred-flavour-profile");
-
-//     pieChart
-//         .height(400)
-//         // .slicesCap(4)
-//         .radius(150)
-//         .transitionDuration(1000)
-//         .dimension(countryDim)
-//         .group(whiskeyPerCountryGroup);
-
-//     dc.renderAll();
-// }
-
-
-
-// Document ready closing bracket
+  }
+    
 });
