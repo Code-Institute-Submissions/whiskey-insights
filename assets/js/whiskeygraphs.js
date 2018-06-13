@@ -219,6 +219,8 @@ function getCountryData(error, whiskeyData) {
   
   showPreferredFlavourProfiles(ndx);
   showMostDivisiveWhiskeys(ndx);
+  showWhiskeyPriceRange(ndx);
+  showBestValueWhiskeys(ndx);
   
   dc.renderAll();
 
@@ -282,31 +284,34 @@ function showPreferredFlavourProfiles(ndx) {
     .yAxis().ticks(4);
   }
   
-  
-  // Trying to get the data from STDEV to show when console.log - START
-  //  Copied the formula to get whiskeyBubbles because when trying to work on the
-  // heat map, I don't seem to be able to access the "STDEV" nor the "Whisky"
-  // columns
-  
-  var whiskeyDeviation = new Object();
 
-  var whiskeyTest = 0;
+// WORK IN PROGRESS - heatMap to show most divisive samples - START
+  
+  
+  // // Trying to get the data from STDEV to show when console.log - START
+  // //  Copied the formula to get whiskeyBubbles because when trying to work on the
+  // // heat map, I don't seem to be able to access the "STDEV" nor the "Whisky"
+  // // columns
+  
+  // var whiskeyDeviation = new Object();
 
-  function getDeviationData(error, whiskeyData) {
-    for (i = 0; i < whiskeyData.length; i++) {
-      if (whiskeyData[i]["STDEV"] in whiskeyDeviation) {
-          whiskeyDeviation[whiskeyData[i]["STDEV"]]++
-          whiskeyTest++;
-      } else {
-          whiskeyDeviation[whiskeyData[i]["STDEV"]] = 1;
-          whiskeyTest++;
-      }
-    }
-  }
+  // var whiskeyTest = 0;
+
+  // function getDeviationData(error, whiskeyData) {
+  //   for (i = 0; i < whiskeyData.length; i++) {
+  //     if (whiskeyData[i]["STDEV"] in whiskeyDeviation) {
+  //         whiskeyDeviation[whiskeyData[i]["STDEV"]]++
+  //         whiskeyTest++;
+  //     } else {
+  //         whiskeyDeviation[whiskeyData[i]["STDEV"]] = 1;
+  //         whiskeyTest++;
+  //     }
+  //   }
+  // }
   
-  console.log(whiskeyDeviation);
-  // Trying to get the data from STDEV to show when console.log - END
-  
+  // console.log(whiskeyDeviation[1]["STDEV"]);
+  // // Trying to get the data from STDEV to show when console.log - END
+ 
 
   function showMostDivisiveWhiskeys(ndx) {
     
@@ -332,6 +337,28 @@ function showPreferredFlavourProfiles(ndx) {
     .colors(["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"])
     .calculateColorDomain();
 
+  }
+  
+  // WORK IN PROGRESS - heatMap to show most divisive samples - END
+  
+  
+  // Now we'll try to find the best rated whiskeys in the different price groups
+  // We'll start with a selector
+  
+  function showWhiskeyPriceRange(ndx) {
+    var priceDim = ndx.dimension(dc.pluck("Cost"));
+    var priceSelect = priceDim.group();
+
+    dc.selectMenu("#best-value-whiskeys")
+        .dimension(priceDim)
+        .group(priceSelect);
+  }
+  
+  // Now, we'll folow by creating tables that will show when selecting the 
+  // different price ranges - START
+  
+  function showBestValueWhiskeys(ndx){
+    
   }
     
 });
