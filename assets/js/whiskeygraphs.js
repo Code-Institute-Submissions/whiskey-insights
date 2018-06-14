@@ -26,7 +26,7 @@ function getCountryData(error, whiskeyData) {
         }
     }
     
-    console.log(whiskeyBubbles);
+    // console.log(whiskeyBubbles);
     
     // console.log(whiskeyTotal);
     
@@ -225,33 +225,16 @@ function getCountryData(error, whiskeyData) {
   dc.renderAll();
 
 }
-
-// function removeEmptyBins(source_group) {
-//   return {
-//     all:function () {
-//       console.log("Sanity check");
-//       return source_group.all().filter(function(d) {
-//         return d.value !== "n/a";
-//       });
-//     }
-//   };
-// }
   
 function showPreferredFlavourProfiles(ndx) {
   
-  // Planning to add color to my bars - START
-  var clusterColors = d3.scale.ordinal()
-    .domain(["A", "B", "C", "E", "F", "G", "H", "I", "J", "R0", "R1", "R2", "R3", "R4", "n/a"])
-    .range(["#ff6600", "#cc5200", "#993d00", "#cc6600", "#ff8000", "#ff9933", "#ffb366", "#ff3300", "#b32400", "#ccff66", "#ccff33", "#cccc00", "#cc9900", "#996600", "#6699ff"]);
-  // Planning to add color to my bars - END
+  // var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
   
-  var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
-  
-  // Trying to create a dimension with keys for the color accesor - START
-   var clusterColorsDim = ndx.dimension(function(d){
-        return [d.Cluster];
-    });
-  // Trying to create a dimension with keys for the color accesor - END
+  var flavourProfileDim = ndx.dimension(function(d) {
+    if (d["Cluster"] !== "n/a") {
+      return d["Cluster"];
+    } 
+  });
   
   var averageRatingByCluster = flavourProfileDim.group().reduce(
     function (p, v) {
@@ -285,9 +268,9 @@ function showPreferredFlavourProfiles(ndx) {
     .height(350)
     .margins({top: 10, right: 50, bottom: 30, left: 50})
     .colorAccessor(function (d) {
-      return d.key[0];
+      return d.key;
     })
-    .colors(clusterColors)
+    .ordinalColors(["#ff6600", "#cc5200", "#993d00", "#cc6600", "#ff8000", "#ff9933", "#ffb366", "#ff3300", "#b32400", "#ccff66", "#ccff33", "#cccc00", "#cc9900", "#996600"])
     .dimension(flavourProfileDim)
     .group(averageRatingByCluster)
     .valueAccessor(function (d) {
@@ -314,57 +297,68 @@ function showPreferredFlavourProfiles(ndx) {
 // PENDING - Manage to get only the top 25 samples to be rendered in the scatter plot
 // Create three colour categories for high, veryHigh and extreme standard deviations
 
+
 function showMostDivisiveWhiskeys(ndx) {
     
-// Define vars, dimension and group
+  // Define vars, dimension and group
 
-var stdevColors = d3.scale.ordinal()
-  .domain(function() {
-    if (mostDivisiveDim.key[2] <= 1) {
-      return "#cc6600";
-    } else if ((mostDivisiveDim.key[2] = 1) && (mostDivisiveDim.key[2] <= 1.1)) {
-      return "#ccff66";
-    } else {
-      return "#ff0000";
-    }
-  })
-  .range(["#cc6600", "#ccff66", "#ff0000"]);
+  var stdevColors = d3.scale.ordinal()
+    .domain(function() {
+      if (mostDivisiveDim.key[2] <= 1) {
+        return "#cc6600";
+      } else if ((mostDivisiveDim.key[2] = 1) && (mostDivisiveDim.key[2] <= 1.1)) {
+        return "#ccff66";
+      } else {
+        return "#ff0000";
+      }
+    })
+    .range(["#cc6600", "#ccff66", "#ff0000"]);
   
   // PENDING - Find a way to get "high" "very high" and "extreme" as 
   // categories with different colours (IDEA: To use var and if/else to
   // separate them and name them)
-
-  var stdevDim = ndx.dimension(dc.pluck("STDEV"));
-  var topStdev = stdevDim.top(25);
-  console.log(topStdev);
   
-  var mostDivisiveDim = ndx.dimension(function(d){
-    return [d.Whisky, d.MetaCritic, d.STDEV];
+  // var stdevDim = ndx.dimension(dc.pluck("STDEV"));
+  var stdevDim = ndx.dimension(function(d) {
+    if (d["STDEV"] >= 0.91) {
+      return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
+    }
   });
+  // var topStdev = stdevDim.top(25);
+  // console.log(topStdev);
+  
+  // var mostDivisiveDim = ndx.dimension(function(d) {
+  //   return [d.STDEV, d.MetaCritic, d.Whisky];
+  // });
     
-  var mostDivisiveGroup = mostDivisiveDim.group();
+  var mostDivisiveGroup = stdevDim.group();
+  
+  
+  console.log(stdevDim.bottom(10)[0]);
 
-  var minStdev = stdevDim.bottom(1)[0].STDEV;
-  var maxStdev = stdevDim.top(1)[0].STDEV;
+  // PENDING - Change the hardcode of the range to programatic calculation
+  var minStdev = stdevDim.bottom(1)[0]["STDEV"];
+  var maxStdev = stdevDim.top(1)[0]["STDEV"];
 
 // Render chart
   dc.scatterPlot("#most-divisive-whiskeys")
     .width(800)
     .height(400)
-    .x(d3.scale.ordinal().domain([minStdev,maxStdev]))
+    // .x(d3.scale.ordinal().domain([minStdev, maxStdev]))
+    .x(d3.scale.linear().domain([0.85, 5]))
     .brushOn(false)
     .symbolSize(8)
     .clipPadding(10)
     .yAxisLabel("Rating")
     .xAxisLabel("Standard Deviation")
     .title(function (d) {
-        return d.key[0] + " has a STDEV of " + d.key[2] + "and a rating of " + d.key[1];
+        return d.key[2] + " has a STDEV of " + d.key[0] + " and a rating of " + d.key[1];
     })
     // .colorAccessor(function (d) {
     //     return d.key[3];
     // })
     // .colors(genderColors)
-    .dimension(mostDivisiveDim)
+    .dimension(stdevDim)
     .group(mostDivisiveGroup)
     .margins({top: 10, right: 50, bottom: 75, left: 75});
 }
