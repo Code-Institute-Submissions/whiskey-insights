@@ -240,14 +240,19 @@ function getCountryData(error, whiskeyData) {
 function showPreferredFlavourProfiles(ndx) {
   
   // Planning to add color to my bars - START
-  // var whiskeyColors = d3.scale.ordinal()
-  //   .domain(["A", "B", ])
-  //   .range(["pink", "blue"]);
-  
+  var clusterColors = d3.scale.ordinal()
+    .domain(["A", "B", "C", "E", "F", "G", "H", "I", "J", "R0", "R1", "R2", "R3", "R4", "n/a"])
+    .range(["#ff6600", "#cc5200", "#993d00", "#cc6600", "#ff8000", "#ff9933", "#ffb366", "#ff3300", "#b32400", "#ccff66", "#ccff33", "#cccc00", "#cc9900", "#996600", "#6699ff"]);
   // Planning to add color to my bars - END
   
   var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
-  // var filtered_dim = removeEmptyBins(flavourProfileDim);
+  
+  // Trying to create a dimension with keys for the color accesor - START
+   var clusterColorsDim = ndx.dimension(function(d){
+        return [d.Cluster];
+    });
+  // Trying to create a dimension with keys for the color accesor - END
+  
   var averageRatingByCluster = flavourProfileDim.group().reduce(
     function (p, v) {
       p.count++;
@@ -268,9 +273,6 @@ function showPreferredFlavourProfiles(ndx) {
     }
   );
   
-  
-  // PENDING - There is a bar at the start that shows data for whiskeys 
-  // with an empty "Cluster" sell. I want to make my code ignore those samples.
   // PENDING - Add colour to the bars
   // PENDING - Add information on what does each cluster mean
   
@@ -282,6 +284,10 @@ function showPreferredFlavourProfiles(ndx) {
     .width(850)
     .height(350)
     .margins({top: 10, right: 50, bottom: 30, left: 50})
+    .colorAccessor(function (d) {
+      return d.key[0];
+    })
+    .colors(clusterColors)
     .dimension(flavourProfileDim)
     .group(averageRatingByCluster)
     .valueAccessor(function (d) {
