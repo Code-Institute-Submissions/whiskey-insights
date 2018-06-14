@@ -310,62 +310,67 @@ function showPreferredFlavourProfiles(ndx) {
 }
   
 
-// WORK IN PROGRESS - heatMap to show most divisive samples - START
-  
-  
-  // // Trying to get the data from STDEV to show when console.log - START
-  // //  Copied the formula to get whiskeyBubbles because when trying to work on the
-  // // heat map, I don't seem to be able to access the "STDEV" nor the "Whisky"
-  // // columns
-  
-  // var whiskeyDeviation = new Object();
+// WORK IN PROGRESS - chart to show most divisive samples - START
+// PENDING - Manage to get only the top 25 samples to be rendered in the scatter plot
+// Create three colour categories for high, veryHigh and extreme standard deviations
 
-  // var whiskeyTest = 0;
-
-  // function getDeviationData(error, whiskeyData) {
-  //   for (i = 0; i < whiskeyData.length; i++) {
-  //     if (whiskeyData[i]["STDEV"] in whiskeyDeviation) {
-  //         whiskeyDeviation[whiskeyData[i]["STDEV"]]++
-  //         whiskeyTest++;
-  //     } else {
-  //         whiskeyDeviation[whiskeyData[i]["STDEV"]] = 1;
-  //         whiskeyTest++;
-  //     }
-  //   }
-  // }
-  
-  // console.log(whiskeyDeviation[1]["STDEV"]);
-  // // Trying to get the data from STDEV to show when console.log - END
- 
-
-  function showMostDivisiveWhiskeys(ndx) {
+function showMostDivisiveWhiskeys(ndx) {
     
-    var divisiveWhiskeysDim = ndx.dimension(dc.pluck("STDEV"));
-    var divisiveWhiskeysGroup = divisiveWhiskeysDim.group().reduceSum(
-      dc.pluck("Whisky"));
-    
-    // Time to draw or chart - a Heat Map highlighting the top 100 most
-    // divisive whiskeys from the sample
-    
-    dc.heatMap("#most-divisive-whiskeys")
-    .width(40 * 20 + 80)
-    .height(40 * 5 + 40)
-    .margins({top: 10, right: 50, bottom: 30, left: 50})
-    .dimension(divisiveWhiskeysDim)
-    .group(divisiveWhiskeysGroup)
-    .keyAccessor(function(d) { return +d.key[0]; })
-    .valueAccessor(function(d) { return +d.key[1]; })
-    .colorAccessor(function(d) { return +d.value; })
-    .title(function(d) {
-        return  "Whiskey's Name: "+ "\n" +
-                "Sandard Deviation: ";})
-    .colors(["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"])
-    .calculateColorDomain();
+// Define vars, dimension and group
 
-  }
+var stdevColors = d3.scale.ordinal()
+  .domain(function() {
+    if (mostDivisiveDim.key[2] <= 1) {
+      return "#cc6600";
+    } else if ((mostDivisiveDim.key[2] = 1) && (mostDivisiveDim.key[2] <= 1.1)) {
+      return "#ccff66";
+    } else {
+      return "#ff0000";
+    }
+  })
+  .range(["#cc6600", "#ccff66", "#ff0000"]);
   
-  // WORK IN PROGRESS - heatMap to show most divisive samples - END
+  // PENDING - Find a way to get "high" "very high" and "extreme" as 
+  // categories with different colours (IDEA: To use var and if/else to
+  // separate them and name them)
+
+  var stdevDim = ndx.dimension(dc.pluck("STDEV"));
+  var topStdev = stdevDim.top(25);
+  console.log(topStdev);
   
+  var mostDivisiveDim = ndx.dimension(function(d){
+    return [d.Whisky, d.MetaCritic, d.STDEV];
+  });
+    
+  var mostDivisiveGroup = mostDivisiveDim.group();
+
+  var minStdev = stdevDim.bottom(1)[0].STDEV;
+  var maxStdev = stdevDim.top(1)[0].STDEV;
+
+// Render chart
+  dc.scatterPlot("#most-divisive-whiskeys")
+    .width(800)
+    .height(400)
+    .x(d3.scale.ordinal().domain([minStdev,maxStdev]))
+    .brushOn(false)
+    .symbolSize(8)
+    .clipPadding(10)
+    .yAxisLabel("Rating")
+    .xAxisLabel("Standard Deviation")
+    .title(function (d) {
+        return d.key[0] + " has a STDEV of " + d.key[2] + "and a rating of " + d.key[1];
+    })
+    // .colorAccessor(function (d) {
+    //     return d.key[3];
+    // })
+    // .colors(genderColors)
+    .dimension(mostDivisiveDim)
+    .group(mostDivisiveGroup)
+    .margins({top: 10, right: 50, bottom: 75, left: 75});
+}
+  
+
+  // WORK IN PROGRESS - chart to show most divisive samples - END 
   
   // Now we'll try to find the best rated whiskeys in the different price groups
   // We'll start with a selector
@@ -375,8 +380,8 @@ function showPreferredFlavourProfiles(ndx) {
     var priceSelect = priceDim.group();
 
     dc.selectMenu("#best-value-whiskeys")
-        .dimension(priceDim)
-        .group(priceSelect);
+      .dimension(priceDim)
+      .group(priceSelect);
   }
   
   // Now, we'll folow by creating tables that will show when selecting the 
