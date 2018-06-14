@@ -220,15 +220,34 @@ function getCountryData(error, whiskeyData) {
   showPreferredFlavourProfiles(ndx);
   showMostDivisiveWhiskeys(ndx);
   showWhiskeyPriceRange(ndx);
-  showBestValueWhiskeys(ndx);
+  // showBestValueWhiskeys(ndx);
   
   dc.renderAll();
 
 }
 
+// function removeEmptyBins(source_group) {
+//   return {
+//     all:function () {
+//       console.log("Sanity check");
+//       return source_group.all().filter(function(d) {
+//         return d.value !== "n/a";
+//       });
+//     }
+//   };
+// }
+  
 function showPreferredFlavourProfiles(ndx) {
   
+  // Planning to add color to my bars - START
+  // var whiskeyColors = d3.scale.ordinal()
+  //   .domain(["A", "B", ])
+  //   .range(["pink", "blue"]);
+  
+  // Planning to add color to my bars - END
+  
   var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
+  // var filtered_dim = removeEmptyBins(flavourProfileDim);
   var averageRatingByCluster = flavourProfileDim.group().reduce(
     function (p, v) {
       p.count++;
@@ -282,7 +301,7 @@ function showPreferredFlavourProfiles(ndx) {
     .xAxisLabel("Different Clusters (Sets of Flavour Profiles)")
     .yAxisLabel("Ratings from 0 to 10 Points")
     .yAxis().ticks(4);
-  }
+}
   
 
 // WORK IN PROGRESS - heatMap to show most divisive samples - START
@@ -357,8 +376,37 @@ function showPreferredFlavourProfiles(ndx) {
   // Now, we'll folow by creating tables that will show when selecting the 
   // different price ranges - START
   
-  function showBestValueWhiskeys(ndx){
-    
-  }
+//   function showBestValueWhiskeys(ndx){
+//     var whiskeyPriceDim = ndx.dimension(dc.pluck("Cost"));
+//     var bestRatedPerPrice = whiskeyPriceDim.group.reduce(
+//       function (p, v) {
+//         ++p.number;
+//         p.total += +v.Speed;
+//         p.avg = Math.round(p.total / p.number);
+//         return p;
+//       },
+//       function (p, v) {
+//         --p.number;
+//         p.total -= +v.Speed;
+//         p.avg = (p.number == 0) ? 0 : Math.round(p.total / p.number);
+//         return p;
+//       },
+//       function (p, v) {
+//         return {number: 0, total: 0, avg: 0};
+//       });
+//   rank = function (p) { return "rank" };
+   
+// chart
+//   .width(768)
+//   .height(480)
+//   .dimension(groupedDimension)
+//   .group(rank)
+//   .columns([function (d) { return d.key },
+//             function (d) { return d.value.number },
+//             function (d) { return d.value.avg }])
+//   .sortBy(function (d) { return d.value.avg })
+//   .order(d3.descending)
+//   chart.render();
+//   } 
     
 });
