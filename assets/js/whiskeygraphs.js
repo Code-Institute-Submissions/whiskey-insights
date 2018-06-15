@@ -219,7 +219,6 @@ function getCountryData(error, whiskeyData) {
   
   showPreferredFlavourProfiles(ndx);
   showMostDivisiveWhiskeys(ndx);
-  // showWhiskeyPriceRangeSelector(ndx);
   showWhiskeysPerPriceRange(ndx);
   showBestValueWhiskeys(ndx);
   
@@ -331,7 +330,7 @@ function showMostDivisiveWhiskeys(ndx) {
     .width(800)
     .height(400)
     .x(d3.scale.linear().domain([minStdev, maxStdev]))
-    .brushOn(false)
+    .brushOn(true)
     .symbolSize(6)
     .clipPadding(10)
     .yAxisLabel("Rating")
@@ -347,28 +346,6 @@ function showMostDivisiveWhiskeys(ndx) {
     .group(mostDivisiveGroup)
     .margins({top: 10, right: 50, bottom: 75, left: 75});
 }
-  
-  
-  // // Now we'll try to find the best rated whiskeys in the different price groups - START
-  // // We'll start with a selector
-  
-  // function showWhiskeyPriceRangeSelector(ndx) {
-  //   // var priceDim = ndx.dimension(dc.pluck("Cost"));
-  //   // The advantage of the below over the above is that I get to filter out 
-  //   // the "n/a" category, which is unwanted
-    
-  //   var priceDim = ndx.dimension(function(d) {
-  //     if (d["Cost"] !== "n/a") {
-  //       return d["Cost"];
-  //     }
-  //   });
-    
-  //   var priceSelect = priceDim.group();
-
-  //   dc.selectMenu("#best-value-whiskeys-selector")
-  //     .dimension(priceDim)
-  //     .group(priceSelect);
-  // }
   
   // // Now, I'll write a pie chart to show the amount of samples 
   // // per different price ranges
@@ -392,37 +369,38 @@ function showWhiskeysPerPriceRange(ndx) {
       .minAngleForLabel(0.2)
       .dimension(priceRangeDim)
       .group(priceRangeGroup)
-      .legend(dc.legend().x(70).y(40));
+      .legend(dc.legend().x(20).y(40)
+      .legendText(function(d) {
+        if (d["name"] == "$") {
+          return "$ for whiskies <$30 CAD";
+        } else if (d["name"] == "$$") {
+          return "$$ for whiskies between $30~$50 CAD";
+        } else if (d["name"] == "$$$") {
+          return "$$$ for whiskies between $50-$70 CAD";
+        } else if (d["name"] == "$$$$") {
+          return "$$$$ for whiskies between $70~$125 CAD";
+        } else if (d["name"] == "$$$$$") {
+          return "$$$$$ for whiskies between $125~$300 CAD";
+        } else if (d["name"] == "$$$$$$") {
+          return "$$$$$$ refers to all whiskies >$300 CAD";
+        }
+      }
+      ));
       // PENDING - Get the legendText to render correctly
-      // .legendText(function(d) {
-      //   if (d["Cost"] == $) {
-      //     return "$ for whiskies <$30 CAD";
-      //   }
-      //   else if (d["Cost"] == $$) {
-      //     return "$$ for whiskies between $30~$50 CAD";
-      //   } else if (d["Cost"] == S$$) {
-      //     return "$$$ for whiskies between $50-$70 CAD";
-      //   } else if (d["Cost"] == $$$$) {
-      //     return "$$$$ for whiskies between $70~$125 CAD";
-      //   } else if (d["Cost"] == $$$$$) {
-      //     return "$$$$$ for whiskies between $125~$300 CAD";
-      //   } else if (d["Cost"] == $$$$$$) {
-      //     return "$$$$$$ refers to all whiskies >$300 CAD";
-      //   }
-      // }
-      // );
   }
   
   // Now, we'll folow by creating tables that will show when selecting the 
   // different price ranges - START
   
 function showBestValueWhiskeys(ndx){
-  var priceRangeDim = ndx.dimension(function(d) {
-    return +d.MetaCritic;
+  
+  var whiskeyRatingDim = ndx.dimension(function(d) {
+    return d["MetaCritic"];
   });
-  var priceRangeGroup = priceRangeDim.group().reduce(
-  // CODE HERE
-  );
+  
+  var whiskeyRatingGroup = whiskeyRatingDim.group().reduceSum(function(d) {
+    return d["Cost"];
+  });
 // rank = function (p) { return "rank" };
 // rating = function (p) { return "MetaCritic" };
 
@@ -431,7 +409,7 @@ function showBestValueWhiskeys(ndx){
   dc.dataTable("#value-table")
     .width(800)
     .height(270)
-    .dimension(priceRangeDim)
-    .group(priceRangeGroup);
+    .dimension(whiskeyRatingDim)
+    .group(whiskeyRatingGroup);
   }   
 });
