@@ -291,70 +291,37 @@ function showPreferredFlavourProfiles(ndx) {
     .yAxisLabel("Ratings from 0 to 10 Points")
     .yAxis().ticks(4);
 }
-  
-
-// WORK IN PROGRESS - chart to show most divisive samples - START
-// PENDING - Manage to get only the top 25 samples to be rendered in the scatter plot
-// Create three colour categories for high, veryHigh and extreme standard deviations
-
 
 function showMostDivisiveWhiskeys(ndx) {
   
-  // var high = function () {
-  //   if (stdevDim.key[0] < 1) {
-  //     return "#99e600";
-  //   }  
-  // }
+  // This chart will highlight whiskeys that made reviewers disagree, this 
+  // doesn't mean their better or worse, but they are probably more divisive
+  // among whiskey lovers!
+
+  // While all the whiskeys are high in STDEV because we're working with the 
+  // Top 25 out a large sample, I wanted to give some color to the scatter plot 
+  // and highlight the very highest 
   
-  // var veryhigh = function () {
-  //   if ((stdevDim.key[0] >= 1) && (stdevDim.key[0] < 1.25)) {
-  //     return "#ffcc00";
-  //   }  
-  // }
-  
-  // var extreme = function () {
-  //   if (stdevDim.key[0] >= 1.25) {
-  //     return "#ffcc00";
-  //   }  
-  // }
-  
-  // var stdevColors = d3.scale.ordinal()
-  //   // .domain(function() {
-  //   //   if (stdevDim.key[0] < 1) {
-  //   //     return "#99e600";
-  //   //   } else if ((stdevDim.key[0] >= 1) && (stdevDim.key[0] < 1.25)) {
-  //   //     return "#ffcc00";
-  //   //   } else {
-  //   //     return "#cc0000";
-  //   //   }
-  //   // })
-  //   .domain([high, veryhigh, extreme])
-  //   .range(["#99e600", "#ffcc00", "#cc0000"]);
   var stdevColors = d3.scale.linear()
     .domain([0.5,1.25,2.5])
     .range(["green", "yellow", "red"]);
+    
+  // Below the (now commented) method used to calculate the Top 25 highest STDEV
   
-  // PENDING - Find a way to get "high" "very high" and "extreme" as 
-  // categories with different colours (IDEA: To use var and if/else to
-  // separate them and name them)
+  // var topStdev = stdevDim.top(25);
+  // console.log(topStdev
   
-  // var stdevDim = ndx.dimension(dc.pluck("STDEV"));
+  // After finding that out, I created a variable that only considers those whiskeys with
+  // a stdev of at least 0.91, which was the lowest score among the top 25 
+  
   var stdevDim = ndx.dimension(function(d) {
     if (d["STDEV"] >= 0.91) {
       return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
     }
   });
-  // var topStdev = stdevDim.top(25);
-  // console.log(topStdev);
-    
+  
   var mostDivisiveGroup = stdevDim.group();
   
-  
-  console.log(stdevDim.top(1)[0]);
-
-  // // PENDING - Change the hardcode of the range to programatic calculation
-  // var minStdev = stdevDim.bottom(1)[0]["STDEV"];
-  // var maxStdev = stdevDim.top(1)[0]["STDEV"];
   var minStdev = 0.85;
   var maxStdev = 5;
 
@@ -377,14 +344,11 @@ function showMostDivisiveWhiskeys(ndx) {
     .colors(stdevColors)
     .dimension(stdevDim)
     .group(mostDivisiveGroup)
-    .legend(dc.legend().x(600).y(10).itemHeight(10).gap(5).legendText(function(d, i) { return i + '. ' + d.name; }))
     .margins({top: 10, right: 50, bottom: 75, left: 75});
 }
   
-
-  // WORK IN PROGRESS - chart to show most divisive samples - END 
   
-  // Now we'll try to find the best rated whiskeys in the different price groups
+  // Now we'll try to find the best rated whiskeys in the different price groups - START
   // We'll start with a selector
   
   function showWhiskeyPriceRange(ndx) {
