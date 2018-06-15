@@ -219,9 +219,9 @@ function getCountryData(error, whiskeyData) {
   
   showPreferredFlavourProfiles(ndx);
   showMostDivisiveWhiskeys(ndx);
-  showWhiskeyPriceRangeSelector(ndx);
+  // showWhiskeyPriceRangeSelector(ndx);
   showWhiskeysPerPriceRange(ndx);
-  // showBestValueWhiskeys(ndx);
+  showBestValueWhiskeys(ndx);
   
   dc.renderAll();
 
@@ -349,43 +349,31 @@ function showMostDivisiveWhiskeys(ndx) {
 }
   
   
-  // Now we'll try to find the best rated whiskeys in the different price groups - START
-  // We'll start with a selector
+  // // Now we'll try to find the best rated whiskeys in the different price groups - START
+  // // We'll start with a selector
   
-  function showWhiskeyPriceRangeSelector(ndx) {
-    // var priceDim = ndx.dimension(dc.pluck("Cost"));
-    // The advantage of the below over the above is that I get to filter out 
-    // the "n/a" category, which is unwanted
+  // function showWhiskeyPriceRangeSelector(ndx) {
+  //   // var priceDim = ndx.dimension(dc.pluck("Cost"));
+  //   // The advantage of the below over the above is that I get to filter out 
+  //   // the "n/a" category, which is unwanted
     
-    var priceDim = ndx.dimension(function(d) {
-      if (d["Cost"] !== "n/a") {
-        return d["Cost"];
-      }
-    });
+  //   var priceDim = ndx.dimension(function(d) {
+  //     if (d["Cost"] !== "n/a") {
+  //       return d["Cost"];
+  //     }
+  //   });
     
-    var priceSelect = priceDim.group();
+  //   var priceSelect = priceDim.group();
 
-    dc.selectMenu("#best-value-whiskeys-selector")
-      .dimension(priceDim)
-      .group(priceSelect);
-  
-    // // Because I want to write a pie chart using the same group and dimension
-    // // Im going to draw it within the same function
-    
-    // dc.pieChart("#best-value-whiskeys-piechart")
-    //   .width(800)
-    //   .height(400)
-    //   .innerRadius(100)
-    //   .legend(dc.legend())
-    //   .dimension(priceDim)
-    //   .group(priceSelect)
-    //   .margins({top: 10, right: 50, bottom: 75, left: 75});
-  }
+  //   dc.selectMenu("#best-value-whiskeys-selector")
+  //     .dimension(priceDim)
+  //     .group(priceSelect);
+  // }
   
   // // Now, I'll write a pie chart to show the amount of samples 
   // // per different price ranges
   
-  function showWhiskeysPerPriceRange(ndx) {
+function showWhiskeysPerPriceRange(ndx) {
     // Define our vars for dimension and group
     
     var priceRangeDim = ndx.dimension(function(d) {
@@ -393,85 +381,57 @@ function showMostDivisiveWhiskeys(ndx) {
         return d["Cost"];
       }
     });
-    // var priceRangeGroup = priceRangeDim.group().reduceSum(dc.pluck("Whisky"));
-    
-    // var priceRangeGroup = priceRangeDim.group().reduce(
-    //   function (p, v) {
-    //     p.count++;
-    //     p.total += v.Whisky;
-    //     return p;
-    //   },
-    //   function (p, v) {
-    //     p.count--;
-    //     if (p.count == 0) {
-    //       p.total = 0;
-    //     } else {
-    //       p.total -= v.Whisky;
-    //     }
-    //     return p;
-    //   },
-    //   function () {
-    //     return {count: 0, total: 0};
-    //   }
-    // );
-    
     var priceRangeGroup = priceRangeDim.group();
     
     // Render our pie chart
     
     dc.pieChart("#best-value-whiskeys-piechart")
       .width(800)
-      .height(250)
-      .radius(100)
-      .legend(dc.legend())
+      .height(270)
+      .radius(125)
+      .minAngleForLabel(0.2)
       .dimension(priceRangeDim)
-      .group(priceRangeGroup);
-      // .keyAccessor ?
-      // .valueAccessor(function (d) {
-      //       if (d.value.count == 0) {
-      //           return 0;
-      //       } else {
-      //           return d.value.total / d.value.count;
-      //       }
-      //   })
-      // .margins({top: 10, right: 50, bottom: 75, left: 75});
+      .group(priceRangeGroup)
+      .legend(dc.legend().x(70).y(40));
+      // PENDING - Get the legendText to render correctly
+      // .legendText(function(d) {
+      //   if (d["Cost"] == $) {
+      //     return "$ for whiskies <$30 CAD";
+      //   }
+      //   else if (d["Cost"] == $$) {
+      //     return "$$ for whiskies between $30~$50 CAD";
+      //   } else if (d["Cost"] == S$$) {
+      //     return "$$$ for whiskies between $50-$70 CAD";
+      //   } else if (d["Cost"] == $$$$) {
+      //     return "$$$$ for whiskies between $70~$125 CAD";
+      //   } else if (d["Cost"] == $$$$$) {
+      //     return "$$$$$ for whiskies between $125~$300 CAD";
+      //   } else if (d["Cost"] == $$$$$$) {
+      //     return "$$$$$$ refers to all whiskies >$300 CAD";
+      //   }
+      // }
+      // );
   }
   
   // Now, we'll folow by creating tables that will show when selecting the 
   // different price ranges - START
   
-  function showBestValueWhiskeys(ndx){
-    var whiskeyPriceDim = ndx.dimension(dc.pluck("Cost"));
-    var bestRatedPerPrice = whiskeyPriceDim.group.reduce(
-      function (p, v) {
-        ++p.number;
-        p.total += +v.Speed;
-        p.avg = Math.round(p.total / p.number);
-        return p;
-      },
-      function (p, v) {
-        --p.number;
-        p.total -= +v.Speed;
-        p.avg = (p.number == 0) ? 0 : Math.round(p.total / p.number);
-        return p;
-      },
-      function (p, v) {
-        return {number: 0, total: 0, avg: 0};
-      });
-  rank = function (p) { return "rank" };
-   
-chart
- dc.dataTable("#value-table")
-  .width(768)
-  .height(480)
-  .dimension(groupedDimension)
-  .group(rank)
-  .columns([function (d) { return d.key },
-            function (d) { return d.value.number },
-            function (d) { return d.value.avg }])
-  .sortBy(function (d) { return d.value.avg })
-  .order(d3.descending)
-  chart.render();
-  } 
-    
+function showBestValueWhiskeys(ndx){
+  var priceRangeDim = ndx.dimension(function(d) {
+    return +d.MetaCritic;
+  });
+  var priceRangeGroup = priceRangeDim.group().reduce(
+  // CODE HERE
+  );
+// rank = function (p) { return "rank" };
+// rating = function (p) { return "MetaCritic" };
+
+  // Render our pie chart
+
+  dc.dataTable("#value-table")
+    .width(800)
+    .height(270)
+    .dimension(priceRangeDim)
+    .group(priceRangeGroup);
+  }   
 });
