@@ -395,12 +395,15 @@ $(document).ready(function() {
   function showBestValueWhiskeys(ndx) {
     
     var ofs = 1;
-    var pageSize = 5;
+    var pageSize = 15;
+    
+    var totalPages = ndx.size();
+    console.log(totalPages);
     
     // jquery events for the buttons - START
     
     $("#first").on("click", function(){
-      ofs -= pageSize;
+      ofs = 1;
       update();
       dataTable.redraw();
     });
@@ -411,25 +414,6 @@ $(document).ready(function() {
       dataTable.redraw();
     });
     
-    // Work in progress for the previous button using a variable - START
-    
-    // PENDIG - Get pagination buttons right
-    
-    // var previousButton = $("#previous");
-    
-    // previousButton.on("click", function() {
-    //   if ( ofs >= 2 ) {
-    //     previousButton.attr("disabled", false);
-    //     ofs -= pageSize;
-    //     update();
-    //     dataTable.redraw();
-    //   } else {
-    //     previousButton.attr("disabled", true);
-    //   }
-    // });
-    
-    // Work in progress for the previous button using a variable - END
-    
     $("#next").on("click", function(){
       ofs += pageSize;
       update();
@@ -437,14 +421,12 @@ $(document).ready(function() {
     });
     
     $("#last").on("click", function(){
-      ofs -= pageSize;
+      ofs = totalPages-pageSize+ofs;
       update();
       dataTable.redraw();
     });
      
     // jquery events for the buttons - END
-    
-
     
     var whiskeyRatingDim = ndx.dimension(function(d) {
       if (["MetaCritic"] !== "n/a") {
@@ -488,9 +470,10 @@ $(document).ready(function() {
     function display() {
       d3.select("#begin").text(ofs);
       d3.select("#end").text(ofs+pageSize-1);
+      d3.select("#first").attr("disabled", ofs<=1 ? "true" : null);
       d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
-      d3.select("#last").attr("disabled", ofs-pageSize < 0 ? "true" : null);
       d3.select("#next").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
+      d3.select("#last").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
       d3.select("#size").text(ndx.size());
     }
     
