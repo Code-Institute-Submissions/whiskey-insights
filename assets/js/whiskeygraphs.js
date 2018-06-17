@@ -488,6 +488,7 @@ $(document).ready(function() {
     function display() {
       d3.select("#begin").text(ofs);
       d3.select("#end").text(ofs+pageSize-1);
+      d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
       d3.select("#last").attr("disabled", ofs-pageSize < 0 ? "true" : null);
       d3.select("#next").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
       d3.select("#size").text(ndx.size());
