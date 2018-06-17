@@ -398,9 +398,10 @@ function showBestValueWhiskeys(ndx){
     return d["MetaCritic"];
   });
   
-  var whiskeyRatingGroup = whiskeyRatingDim.group().reduceSum(function(d) {
-    return d["Cost"];
-  });
+  // var whiskeyRatingGroup = whiskeyRatingDim.group().reduceSum(function(d) {
+  //   return d["Cost"];
+  // });
+  
 // rank = function (p) { return "rank" };
 // rating = function (p) { return "MetaCritic" };
 
@@ -410,6 +411,16 @@ function showBestValueWhiskeys(ndx){
     .width(800)
     .height(270)
     .dimension(whiskeyRatingDim)
-    .group(whiskeyRatingGroup);
+    // .group(whiskeyRatingGroup)
+    .group(function(d) {
+      d["Whisky"] += d["Whisky"];
+        return d["MetaCritic"];
+    })
+    .columns([function (d) { return d["MetaCritic"] },
+              function (d) { return d["Whisky"] },
+              function (d) { return d["Cost"] }])
+    // .sortBy(function (d) { return d.value.avg })
+    .order(d3.descending);
+    // chart.render();
   }   
 });
