@@ -217,6 +217,7 @@ $(document).ready(function() {
     
     // Below, a call to all the functions I'll need
     
+    showCountrySelector(ndx);
     showPreferredFlavourProfiles(ndx);
     showMostDivisiveWhiskeys(ndx);
     showWhiskeysPerPriceRange(ndx);
@@ -224,6 +225,15 @@ $(document).ready(function() {
     
     dc.renderAll();
   
+  }
+  
+  function showCountrySelector(ndx){
+    var countryDim = ndx.dimension(dc.pluck("Country"));
+    var countrySelect = countryDim.group();
+
+    dc.selectMenu("#country-selector")
+        .dimension(countryDim)
+        .group(countrySelect);
   }
     
   function showPreferredFlavourProfiles(ndx) {
