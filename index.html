@@ -38,25 +38,21 @@
         </div>
     </nav>
     
-    <div>
+    <div class="row">
         <h3>Whiskeys per Country</h3>
         <div id="world-map">
             <!-- The world Map goes here and the bubble chart within it -->
         </div>
     </div>
-    
-    </br>
-    
-    <div>
+
+    <div class="row">
         <h3>Preferred Flavour Profile</h3>
         <p>Average rating of the different flavour profiles separated in the 
         data (when available).</p>
         <div id="preferred-flavour-profile"></div>
     </div>
     
-    </br>
-    
-    <div>
+    <div class="row">
         <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
         <p>Using the standard deviation, we can see which whiskeys got the 
         widest range of ratings when reviewed.</br>
@@ -67,38 +63,36 @@
     
     </br>
     
-    <div>
+    <div class="row">
         <h3>Let's Talk Value</h3>
         <p>There are plenty of high rated samples across all different 
         price points, so no matter one's budget, it's possible to find great
         whiskey!</p>
         <div id="best-value-whiskeys-piechart"></div>
     </div>
-    </br> 
-    <div>
-        <!--</br>-->
-        <!--<div id="best-value-whiskeys-selector"></div>-->
-        <!--</br>-->
-        <!--<div>-->
-        <!--    <p>$ is for whiskies <$30 CAD</br>-->
-        <!--    $$ for whiskies between $30~$50 CAD</br>-->
-        <!--    $$$ for whiskies between $50-$70 CAD</br>-->
-        <!--    $$$$ for whiskies between $70~$125 CAD</br>-->
-        <!--    $$$$$ for whiskies between $125~$300 CAD</br>-->
-        <!--    $$$$$+ refers to all whiskies >$300 CAD.</p>-->
-        <!--</div>-->
-        <div>
-            <h3>Show Best Rated Whiskeys</h3>
-            <p>Below, a list of the best rated bottles from our selection</p>
-            <p>Click on a price range to get the best rated bottles in that
-            cost</p>
-            <table id="value-table">
-                <tr>
-                    <th>Rating</th>
-                    <th>Name of Whiskey</th>
-                    <th>Country of Origin</th>
-                </tr>
-            </table>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Show Best Rated Whiskeys</h3>
+                <p>Below, a list of the best rated bottles from our selection</p>
+                <p>Click on a price range to get the best rated bottles in that
+                cost</p>
+                <table id="value-table">
+                    <tr>
+                        <th>Rating</th>
+                        <th>Name of Whiskey</th>
+                        <th>Country of Origin</th>
+                    </tr>
+                </table>
+                <div id="paging">
+                    Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
+                    <input id="first" class="btn" type="button" value="First"/>
+                    <input id="previous" class="btn" type="Button" value="Previous"/>
+                    <input id="next" class="btn" type="button" value="Next"/>
+                    <input id="last" class="btn" type="Button" value="Last"/>
+                </div>
+            </div>
         </div>
     </div>
 </body>
