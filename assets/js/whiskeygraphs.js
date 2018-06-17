@@ -397,19 +397,38 @@ $(document).ready(function() {
     var ofs = 1;
     var pageSize = 5;
     
-    // jquery event handle function que on click ejecute last y next - START
+    // jquery events for the buttons - START
     
-    // $("#first").on("click", function(){
-    //   ofs -= pageSize;
-    //   update();
-    //   dataTable.redraw();
-    // });
+    $("#first").on("click", function(){
+      ofs -= pageSize;
+      update();
+      dataTable.redraw();
+    });
     
     $("#previous").on("click", function(){
       ofs -= pageSize;
       update();
       dataTable.redraw();
     });
+    
+    // Work in progress for the previous button using a variable - START
+    
+    // PENDIG - Get pagination buttons right
+    
+    // var previousButton = $("#previous");
+    
+    // previousButton.on("click", function() {
+    //   if ( ofs >= 2 ) {
+    //     previousButton.attr("disabled", false);
+    //     ofs -= pageSize;
+    //     update();
+    //     dataTable.redraw();
+    //   } else {
+    //     previousButton.attr("disabled", true);
+    //   }
+    // });
+    
+    // Work in progress for the previous button using a variable - END
     
     $("#next").on("click", function(){
       ofs += pageSize;
@@ -423,7 +442,7 @@ $(document).ready(function() {
       dataTable.redraw();
     });
      
-    // jquery event handle function que on click ejecute last y next - END
+    // jquery events for the buttons - END
     
 
     
