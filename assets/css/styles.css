@@ -38,6 +38,14 @@
     position: relative;
 }
 
+.datamaps-bubble {
+    /* PENDING - Eliminate stroke-width on the bubbles */
+    /*border-color: transparent;*/
+    /*stroke: black;*/
+    /*border-width: 0px;*/
+}
+
+
 #toggle-map {
     border-radius: 5px;
     font-style: italic; 

@@ -51,7 +51,7 @@ $(document).ready(function() {
         NLD: "crimson",
         SCT: "hotPink",
         ZAF: "cyan",
-        SWE: "darkgreen",
+        SWE: "orange",
         CHE: "gold",
         TWN: "indigo",
         AUS: "lime",
@@ -63,8 +63,24 @@ $(document).ready(function() {
     // To calculate the radius, I've done a rule of three to help me scale them up 
     // because otherwise the bigger radius would make the chart impossible to read
     
+    // function calculateradius(countryTotal) {
+    //   return countryTotal*100/whiskeyTotal;
+    // }
+    
     function calculateradius(countryTotal) {
-      return countryTotal*100/whiskeyTotal;
+      if ( countryTotal < 10 ) {
+        return (countryTotal*100/whiskeyTotal) * 6;
+      } else if ((countryTotal > 10) && (countryTotal < 36 )) {
+        return (countryTotal*100/whiskeyTotal) * 5;
+      } else if ((countryTotal > 36) && (countryTotal < 50 )) {
+        return (countryTotal*100/whiskeyTotal) * 4;
+      } else if ((countryTotal > 50 ) && (countryTotal < 100 )) {
+        return (countryTotal*100/whiskeyTotal) * 3;
+      } else if ((countryTotal > 100 ) && (countryTotal < 250 )) {
+        return (countryTotal*100/whiskeyTotal) * 2;
+      } else {
+        return (countryTotal*100/whiskeyTotal);
+      }
     }
     
     bubble_map.bubbles([
@@ -75,6 +91,15 @@ $(document).ready(function() {
         bottles: whiskeyBubbles["Belgium"],
         country: 'BEL',
         fillKey: 'BEL',
+      },{
+        name: 'Scotland',
+        radius: calculateradius(whiskeyBubbles["Scotland"]),
+        // centered: 'SCT',
+        bottles: whiskeyBubbles["Scotland"],
+        country: 'SCT',
+        fillKey: 'SCT',
+        latitude: 55.95,
+        longitude: -3.18,
       },{
         name: 'Canada',
         radius: calculateradius(whiskeyBubbles["Canada"]),
@@ -134,15 +159,6 @@ $(document).ready(function() {
         country: 'NLD',
         fillKey: 'NLD',
       },{
-        name: 'Scotland',
-        radius: calculateradius(whiskeyBubbles["Scotland"]),
-        // centered: 'SCT',
-        bottles: whiskeyBubbles["Scotland"],
-        country: 'SCT',
-        fillKey: 'SCT',
-        latitude: 55.95,
-        longitude: -3.18,
-      },{
         name: 'South Africa',
         radius: calculateradius(whiskeyBubbles["South Africa"]),
         centered: 'ZAF',
@@ -198,10 +214,11 @@ $(document).ready(function() {
       }
     ], {
       popupTemplate: function(geo, data) {
-        return '<div class="hoverinfo">Botles Reviewed: ' + data.bottles;
+        return '<div class="hoverinfo">Botles Reviewed: ' + data.bottles + ' from ' + data.name;
       }
     });
     
+
     // Now that the bubblechart is sorted, I'll work on the rest of the graphs
   
     var ndx = crossfilter(whiskeyData);
@@ -217,6 +234,7 @@ $(document).ready(function() {
     
     // Below, a call to all the functions I'll need
     
+    // bubble_map();
     showCountrySelector(ndx);
     showResetButton(ndx);
     showPreferredFlavourProfiles(ndx);
