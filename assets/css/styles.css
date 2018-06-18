@@ -57,6 +57,32 @@
     display: none;
 }
 
+#heading-1 {
+    width: 60px;
+}
+
+#heading-2 {
+    width: 500px;
+}
+
+#heading-3 {
+    width: 80px;
+}
+
+#paging {
+    margin-top: 30px;
+}
+
+.paging-btn {
+    background-color: #ff661a;
+    color: #ffffff;
+}
+
+.paging-btn:hover {
+    background-color: #cc4400;
+    color: #ffffff;
+}
+
 /* Footer */
 .page-footer {
     background-color: #ff9966;

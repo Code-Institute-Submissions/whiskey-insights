@@ -281,7 +281,7 @@ $(document).ready(function() {
     
   
     dc.barChart("#preferred-flavour-profile")
-      .width(500)
+      .width(300)
       .height(300)
       .margins({top: 10, right: 50, bottom: 30, left: 50})
       .colorAccessor(function (d) {
@@ -300,7 +300,7 @@ $(document).ready(function() {
               return valueAverage.toFixed(2);
           }
       })
-      .transitionDuration(500)
+      .transitionDuration(300)
       .x(d3.scale.ordinal())
       .xUnits(dc.units.ordinal)
       .elasticY(true)
@@ -344,8 +344,9 @@ $(document).ready(function() {
   
   // Render chart
     dc.scatterPlot("#most-divisive-whiskeys")
-      .width(500)
+      .width(300)
       .height(300)
+      .transitionDuration(300)
       .x(d3.scale.linear().domain([minStdev, maxStdev]))
       .brushOn(true)
       .symbolSize(6)
@@ -380,9 +381,10 @@ $(document).ready(function() {
       // Render our pie chart
       
       dc.pieChart("#best-value-whiskeys-piechart")
-        .width(800)
-        .height(270)
-        .radius(125)
+        .width(300)
+        .height(450)
+        .radius(90)
+        .transitionDuration(300)
         .minAngleForLabel(0.2)
         .dimension(priceRangeDim)
         .group(priceRangeGroup)

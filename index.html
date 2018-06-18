@@ -68,32 +68,33 @@
             </div>
         </div>
 
-        <!-- The bar chart and the scatter plot-->
+        <!-- The bar chart, scatter plot and pie chart-->
         <div class="col-xs-12">
             <!-- The bar chart goes here -->
-            <div class="row col-xs-6">
+            <div class="row col-xs-4">
                 <h3>Preferred Flavour Profile</h3>
                 <p>Average rating of the different flavour profiles separated in the data (when available).</p>
                 <div id="preferred-flavour-profile" class="reset-chart"></div>
             </div>
 
             <!-- The scatter plot goes here -->
-            <div class="row col-xs-6">
+            <div class="row col-xs-4">
                 <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
                 <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
                     This shows that there's less consensus on their final score.</p>
                 Below, the top 25 most divisive whiskeys from the sample.</p>
                 <div id="most-divisive-whiskeys" class="reset-chart"></div>
             </div>
+            
+            <!-- The pie chart goes here -->
+            <div class="row col-xs-4">
+                <h3>Let's Talk Value</h3>
+                <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
+                </p>
+                <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
+            </div>
         </div>
 
-        <!-- The pie chart goes here -->
-        <div class="row col-xs-12">
-            <h3>Let's Talk Value</h3>
-            <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
-            </p>
-            <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
-        </div>
 
         <!-- The dataTable goes here -->
         <div class="row col col-xs-12">
@@ -104,18 +105,18 @@
             <table id="value-table" class="reset-chart">
                 <thead>
                     <tr>
-                        <th>Rating</th>
-                        <th>Name of Whiskey</th>
-                        <th>Country of Origin</th>
+                        <th id="heading-1">Rating</th>
+                        <th id="heading-2">Name of Whiskey</th>
+                        <th id="heading-3">Price Range</th>
                     </tr>
                 </thead>
             </table>
             <div id="paging">
                 Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
-                <input id="first" class="btn" type="button" value="First" />
-                <input id="previous" class="btn" type="Button" value="Previous" />
-                <input id="next" class="btn" type="button" value="Next" />
-                <input id="last" class="btn" type="Button" value="Last" />
+                <input id="first" class="btn paging-btn" type="button" value="First" />
+                <input id="previous" class="btn paging-btn" type="Button" value="Previous" />
+                <input id="next" class="btn paging-btn" type="button" value="Next" />
+                <input id="last" class="btn paging-btn" type="Button" value="Last" />
             </div>
         </div>
     </div>
