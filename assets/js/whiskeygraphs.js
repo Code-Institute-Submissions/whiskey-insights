@@ -8,27 +8,30 @@ $(document).ready(function() {
   // We create a variable with an object (whiskeyBubbles) to determine the number of bottles per country,
   // and a variable with a number (whiskeyTotal), to calculate the total of bottles reviewd
   
-  var whiskeyBubbles = new Object();
-  
-  var whiskeyTotal = 0;
+
   
   function getCountryData(error, whiskeyData) {
-      for (i = 0; i < whiskeyData.length; i++) {
-        
-          // console.log(whiskeyData[i]["Country"]);
-          
-          if (whiskeyData[i]["Country"] in whiskeyBubbles) {
-              whiskeyBubbles[whiskeyData[i]["Country"]]++
-              whiskeyTotal++;
-          } else {
-              whiskeyBubbles[whiskeyData[i]["Country"]] = 1;
-              whiskeyTotal++;
-          }
+    
+    var whiskeyBubbles = new Object();
+  
+    var whiskeyTotal = 0;
+    
+    for (i = 0; i < whiskeyData.length; i++) {
+      
+      // console.log(whiskeyData[i]["Country"]);
+      
+      if (whiskeyData[i]["Country"] in whiskeyBubbles) {
+        whiskeyBubbles[whiskeyData[i]["Country"]]++
+        whiskeyTotal++;
+      } else {
+        whiskeyBubbles[whiskeyData[i]["Country"]] = 1;
+        whiskeyTotal++;
       }
+    }
       
-      // console.log(whiskeyBubbles);
-      
-      // console.log(whiskeyTotal);
+    // console.log(whiskeyBubbles);
+    
+    // console.log(whiskeyTotal);
       
     // Below, we start to create the individual bubbles
   

@@ -41,7 +41,8 @@
 .datamaps-bubble {
     /* PENDING - Eliminate stroke-width on the bubbles */
     /*border-color: transparent;*/
-    /*stroke: black;*/
+    stroke: #801a00 !important;
+    stroke-width: 1px !important;
     /*border-width: 0px;*/
 }
 
