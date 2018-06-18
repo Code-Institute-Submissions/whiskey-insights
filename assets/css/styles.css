@@ -1,3 +1,4 @@
+/* Navbar */
 #my-navbar{
     height: 65px;
 }
@@ -9,10 +10,18 @@
     margin-top: 12px;
 }
 
+/* World Map */
+
 #world-map {
     height: 400px;
     width: 850px;
     position: relative;
+}
+
+/* dataTable */
+
+.dc-table-label {
+    display: none;
 }
 
 /* Footer */

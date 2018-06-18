@@ -243,19 +243,9 @@ $(document).ready(function() {
           dc.filterAll();
           dc.redrawAll();
     });
-  // reset button
-  //   var allCharts =  showPreferredFlavourProfiles(ndx);
-  //   showMostDivisiveWhiskeys(ndx);
-  //   showWhiskeysPerPriceRange(ndx);
-  //   showBestValueWhiskeys(ndx);
-  // }
-  //   var resetAll = function (allCharts) {
-  //   filterAll();dc.redrawAll();
   }
     
   function showPreferredFlavourProfiles(ndx) {
-    
-    // var flavourProfileDim = ndx.dimension(dc.pluck("Cluster"));
     
     var flavourProfileDim = ndx.dimension(function(d) {
       if (d["Cluster"] !== "n/a") {
@@ -473,6 +463,26 @@ $(document).ready(function() {
     // Render our data table
     
     var dataTable = dc.dataTable("#value-table")
+    
+    // var LABEL_CSS_CLASS = "dc-table-label";
+    // var ROW_CSS_CLASS = "dc-table-row";
+    // var COLUMN_CSS_CLASS = "dc-table-column";
+    // var GROUP_CSS_CLASS = "dc-table-group";
+    // var HEAD_CSS_CLASS = "dc-table-head";
+    
+    // // with a th for each column
+    // var headcols = headrow.selectAll("th")
+    //   .data(_columns);
+    //   headcols.exit().remove();
+    //   headcols.enter().append("th")
+    //   .merge(headcols)
+    //         .attr('class', HEAD_CSS_CLASS)
+    //         .html(function (d) {
+    //             return (_chart._doColumnHeaderFormat(d));
+    //         });
+    // }
+    
+    // $("#value-table").preppend("<tr></tr>");
   
     // dc.dataTable("#value-table")
     dataTable
@@ -483,8 +493,20 @@ $(document).ready(function() {
       .columns([function (d) { return d["MetaCritic"] },
                 function (d) { return d["Whisky"] },
                 function (d) { return d["Cost"] }])
-      // .columns(d["MetaCritic"], d["Whisky"], d["Cost"])
-      // .sortBy(function (d) { return d.value.avg })
+      // .columns([
+      //   { 
+      //     label: "Rating",
+      //     format: function (d) { return d["MetaCritic"] },
+      //   },
+      //   {
+      //     label: "Whiskey",
+      //     function (d) { return d["Whisky"] },
+      //   },
+      //   {
+      //     label: "Price",
+      //     function (d) { return d["Cost"] },
+      //   }
+      // ])
       .size(Infinity)
       .order(d3.descending);
       
