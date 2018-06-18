@@ -64,6 +64,7 @@
                 <!--<h3>Reset all Selections </h3>-->
                 <!--<div id="reset-button"></div>-->
                 <input id="reset-button" class="btn" type="button" value="Reset all Selections" />
+                <!--<span><a href="javascript:dc.filterAll(); dc.renderAll(); dc.redrawAll(); dc.refocusAll();">Reset All</a></span>-->
             </div>
         </div>
 
@@ -73,7 +74,7 @@
             <div class="row col-xs-6">
                 <h3>Preferred Flavour Profile</h3>
                 <p>Average rating of the different flavour profiles separated in the data (when available).</p>
-                <div id="preferred-flavour-profile"></div>
+                <div id="preferred-flavour-profile" class="reset-chart"></div>
             </div>
 
             <!-- The scatter plot goes here -->
@@ -82,7 +83,7 @@
                 <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
                     This shows that there's less consensus on their final score.</p>
                 Below, the top 25 most divisive whiskeys from the sample.</p>
-                <div id="most-divisive-whiskeys"></div>
+                <div id="most-divisive-whiskeys" class="reset-chart"></div>
             </div>
         </div>
 
@@ -92,7 +93,7 @@
                 <h3>Let's Talk Value</h3>
                 <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
                 </p>
-                <div id="best-value-whiskeys-piechart"></div>
+                <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
             </div>
 
             <!-- The dataTable goes here -->
@@ -101,7 +102,7 @@
                 <p>Below, a list of the best rated bottles from our selection</p>
                 <p>Click on a price range to get the best rated bottles in that cost
                 </p>
-                <table id="value-table">
+                <table id="value-table" class="reset-chart">
                     <tr>
                         <th>Rating</th>
                         <th>Name of Whiskey</th>
@@ -149,7 +150,7 @@
                         <li>
                             <a class="footer-link" href="http://whiskyanalysis.com/" target="_blank">whiskyanalysis.com</a>
                         </li>
-
+                    </ul>
                 </div>
                 <!-- Grid column -->
 

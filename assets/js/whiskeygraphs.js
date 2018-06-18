@@ -238,7 +238,19 @@ $(document).ready(function() {
   }
   
   function showResetButton(ndx) {
-    // reset button
+    $("#reset-button").on("click", function() {
+        $(".reset-chart")
+          dc.filterAll();
+          dc.redrawAll();
+    });
+  // reset button
+  //   var allCharts =  showPreferredFlavourProfiles(ndx);
+  //   showMostDivisiveWhiskeys(ndx);
+  //   showWhiskeysPerPriceRange(ndx);
+  //   showBestValueWhiskeys(ndx);
+  // }
+  //   var resetAll = function (allCharts) {
+  //   filterAll();dc.redrawAll();
   }
     
   function showPreferredFlavourProfiles(ndx) {
