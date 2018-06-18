@@ -60,6 +60,14 @@
     background-color: #cc4400;
 }
 
+/* Flex box graphs */
+
+.center-charts {
+    margin-top: 20px;
+    /*display: flex;*/
+    background-color: #ffeee6;
+}
+
 /* dataTable */
 
 .dc-table-label {

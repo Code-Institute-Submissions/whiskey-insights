@@ -302,9 +302,10 @@ $(document).ready(function() {
     
   
     dc.barChart("#preferred-flavour-profile")
-      .width(300)
+      .width(350)
       .height(300)
-      .margins({top: 10, right: 50, bottom: 30, left: 50})
+      // .margins({top: 10, right: 50, bottom: 30, left: 50})
+      .clipPadding(200)
       .colorAccessor(function (d) {
         return d.key;
       })
