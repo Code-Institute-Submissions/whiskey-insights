@@ -20,7 +20,7 @@
     <script type="text/javascript" src="assets/js/crossfilter.min.js"></script>
     <script type="text/javascript" src="assets/js/dc.min.js"></script>
     <script type="text/javascript" src="assets/js/queue.min.js"></script>
-    <!--<script type="text/javascript" src="assets/js/map.js"></script>-->
+    <script type="text/javascript" src="assets/js/effects.js"></script>
     <script type="text/javascript" src="assets/js/whiskeygraphs.js"></script>
 
 </head>
@@ -38,7 +38,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" id="main-container">
 
         <!-- Intro text -->
         <div class="row">
@@ -47,7 +47,7 @@
 
         <!-- The world Map goes here and the bubble chart within it -->
         <div class="row col-xs-12">
-            <h3>Whiskeys per Country</h3>
+            <h3>Whiskeys per Country - <span id="toggle-map" onclick="toggleFunction()">Hide/Show Map</span></h3>
             <div id="world-map"></div>
         </div>
 
@@ -87,37 +87,35 @@
             </div>
         </div>
 
+        <!-- The pie chart goes here -->
         <div class="row col-xs-12">
-            <!-- The pie chart goes here -->
-            <div class="row col-xs-6">
-                <h3>Let's Talk Value</h3>
-                <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
-                </p>
-                <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
-            </div>
+            <h3>Let's Talk Value</h3>
+            <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
+            </p>
+            <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
+        </div>
 
-            <!-- The dataTable goes here -->
-            <div class="row col col-xs-6">
-                <h3>Show Best Rated Whiskeys</h3>
-                <p>Below, a list of the best rated bottles from our selection</p>
-                <p>Click on a price range to get the best rated bottles in that cost
-                </p>
-                <table id="value-table" class="reset-chart">
-                    <thead>
-                        <tr>
-                            <th>Rating</th>
-                            <th>Name of Whiskey</th>
-                            <th>Country of Origin</th>
-                        </tr>
-                    </thead>
-                </table>
-                <div id="paging">
-                    Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
-                    <input id="first" class="btn" type="button" value="First" />
-                    <input id="previous" class="btn" type="Button" value="Previous" />
-                    <input id="next" class="btn" type="button" value="Next" />
-                    <input id="last" class="btn" type="Button" value="Last" />
-                </div>
+        <!-- The dataTable goes here -->
+        <div class="row col col-xs-12">
+            <h3>Show Best Rated Whiskeys</h3>
+            <p>Below, a list of the best rated bottles from our selection</p>
+            <p>Click on a price range to get the best rated bottles in that cost
+            </p>
+            <table id="value-table" class="reset-chart">
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Name of Whiskey</th>
+                        <th>Country of Origin</th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="paging">
+                Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
+                <input id="first" class="btn" type="button" value="First" />
+                <input id="previous" class="btn" type="Button" value="Previous" />
+                <input id="next" class="btn" type="button" value="Next" />
+                <input id="last" class="btn" type="Button" value="Last" />
             </div>
         </div>
     </div>
