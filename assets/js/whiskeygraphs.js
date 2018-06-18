@@ -218,6 +218,7 @@ $(document).ready(function() {
     // Below, a call to all the functions I'll need
     
     showCountrySelector(ndx);
+    showResetButton(ndx);
     showPreferredFlavourProfiles(ndx);
     showMostDivisiveWhiskeys(ndx);
     showWhiskeysPerPriceRange(ndx);
@@ -227,13 +228,17 @@ $(document).ready(function() {
   
   }
   
-  function showCountrySelector(ndx){
+  function showCountrySelector(ndx) {
     var countryDim = ndx.dimension(dc.pluck("Country"));
     var countrySelect = countryDim.group();
 
     dc.selectMenu("#country-selector")
         .dimension(countryDim)
         .group(countrySelect);
+  }
+  
+  function showResetButton(ndx) {
+    // reset button
   }
     
   function showPreferredFlavourProfiles(ndx) {
@@ -274,8 +279,8 @@ $(document).ready(function() {
     
   
     dc.barChart("#preferred-flavour-profile")
-      .width(850)
-      .height(350)
+      .width(500)
+      .height(300)
       .margins({top: 10, right: 50, bottom: 30, left: 50})
       .colorAccessor(function (d) {
         return d.key;
@@ -337,8 +342,8 @@ $(document).ready(function() {
   
   // Render chart
     dc.scatterPlot("#most-divisive-whiskeys")
-      .width(800)
-      .height(400)
+      .width(500)
+      .height(300)
       .x(d3.scale.linear().domain([minStdev, maxStdev]))
       .brushOn(true)
       .symbolSize(6)

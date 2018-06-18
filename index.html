@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/d3.min.js"></script>
     <script type="text/javascript" src="assets/js/topojson.min.js"></script>
-    <script type="text/javascript" src="assets/js/datamaps.world.min.js"></script>    
+    <script type="text/javascript" src="assets/js/datamaps.world.min.js"></script>
     <script type="text/javascript" src="assets/js/crossfilter.min.js"></script>
     <script type="text/javascript" src="assets/js/dc.min.js"></script>
     <script type="text/javascript" src="assets/js/queue.min.js"></script>
@@ -31,57 +31,76 @@
         <div class="container-fluid" id="my-navbar">
             <a class="navbar-brand" href="index.html">
                 <div class="navbar-header">
-                    <img alt="whiskey-insight-brand-icon" src="assets/images/whiskey-glass.jpg" >
-                 </div>
+                    <img alt="whiskey-insight-brand-icon" src="assets/images/whiskey-glass.jpg">
+                </div>
             </a>
             <p id="navbar-title">Whiskey Insight - Drops of Information About Whiskeys of the World</p>
         </div>
     </nav>
-    
-    <div class="row">
-        <h3>Whiskeys per Country</h3>
-        <div id="world-map">
-            <!-- The world Map goes here and the bubble chart within it -->
-        </div>
-    </div>
-    
-    <div class="row">
-        <div id="country-selector"></div>
-    </div>
-
-    <div class="row">
-        <h3>Preferred Flavour Profile</h3>
-        <p>Average rating of the different flavour profiles separated in the 
-        data (when available).</p>
-        <div id="preferred-flavour-profile"></div>
-    </div>
-    
-    <div class="row">
-        <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
-        <p>Using the standard deviation, we can see which whiskeys got the 
-        widest range of ratings when reviewed.</br>
-        This shows that there's less consensus on their final score.</p>
-        Below, the top 25 most divisive whiskeys from the sample.</p>
-        <div id="most-divisive-whiskeys"></div>
-    </div>
-    
-    </br>
-    
-    <div class="row">
-        <h3>Let's Talk Value</h3>
-        <p>There are plenty of high rated samples across all different 
-        price points, so no matter one's budget, it's possible to find great
-        whiskey!</p>
-        <div id="best-value-whiskeys-piechart"></div>
-    </div>
 
     <div class="container">
+
+        <!-- Intro text -->
         <div class="row">
-            <div class="col">
+            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt minima eos explicabo impedit veniam, iste dolorem non nemo officiis voluptatum deserunt maiores maxime, ipsa itaque.</h4>
+        </div>
+
+        <!-- The world Map goes here and the bubble chart within it -->
+        <div class="row col-xs-12">
+            <h3>Whiskeys per Country</h3>
+            <div id="world-map"></div>
+        </div>
+
+        <!-- Selector and Reset Button -->
+        <div class="col-xs-12">
+            <!-- The selector goes here -->
+            <div class="row col-xs-6">
+                <h3>Filter by Country </h3>
+                <div id="country-selector"></div>
+            </div>
+
+            <!-- The reset button here -->
+            <div class="row col-xs-6">
+                <!--<h3>Reset all Selections </h3>-->
+                <!--<div id="reset-button"></div>-->
+                <input id="reset-button" class="btn" type="button" value="Reset all Selections" />
+            </div>
+        </div>
+
+        <!-- The bar chart and the scatter plot-->
+        <div class="col-xs-12">
+            <!-- The bar chart goes here -->
+            <div class="row col-xs-6">
+                <h3>Preferred Flavour Profile</h3>
+                <p>Average rating of the different flavour profiles separated in the data (when available).</p>
+                <div id="preferred-flavour-profile"></div>
+            </div>
+
+            <!-- The scatter plot goes here -->
+            <div class="row col-xs-6">
+                <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
+                <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
+                    This shows that there's less consensus on their final score.</p>
+                Below, the top 25 most divisive whiskeys from the sample.</p>
+                <div id="most-divisive-whiskeys"></div>
+            </div>
+        </div>
+
+        <div class="row col-xs-12">
+            <!-- The pie chart goes here -->
+            <div class="row col-xs-6">
+                <h3>Let's Talk Value</h3>
+                <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
+                </p>
+                <div id="best-value-whiskeys-piechart"></div>
+            </div>
+
+            <!-- The dataTable goes here -->
+            <div class="row col col-xs-6">
                 <h3>Show Best Rated Whiskeys</h3>
                 <p>Below, a list of the best rated bottles from our selection</p>
-                <p>Click on a price range to get the best rated bottles in that
-                cost</p>
+                <p>Click on a price range to get the best rated bottles in that cost
+                </p>
                 <table id="value-table">
                     <tr>
                         <th>Rating</th>
@@ -91,14 +110,62 @@
                 </table>
                 <div id="paging">
                     Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
-                    <input id="first" class="btn" type="button" value="First"/>
-                    <input id="previous" class="btn" type="Button" value="Previous"/>
-                    <input id="next" class="btn" type="button" value="Next"/>
-                    <input id="last" class="btn" type="Button" value="Last"/>
+                    <input id="first" class="btn" type="button" value="First" />
+                    <input id="previous" class="btn" type="Button" value="Previous" />
+                    <input id="next" class="btn" type="button" value="Next" />
+                    <input id="last" class="btn" type="Button" value="Last" />
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="page-footer">
+        <!-- Footer Links -->
+        <div class="container-fluid text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">About Whiskey Insight</h5>
+                    <p>Whiskey Insight uses data collected by Eric "Selfbuilt."</p>
+                    <p>Graphs by Gabriela Guedez H.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!--<hr class="clearfix w-100 d-md-none pb-3">-->
+
+                <!-- Grid column -->
+                <div class="col-md-6 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="footer-link" href="http://whiskyanalysis.com/" target="_blank">whiskyanalysis.com</a>
+                        </li>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a class="footer-link" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
 </body>
 
 </html>

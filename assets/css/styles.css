@@ -15,3 +15,39 @@
     position: relative;
 }
 
+/* Footer */
+.page-footer {
+    background-color: #ff9966;
+}
+
+.page-footer h5 {
+    font-weight: bold;
+    color: #993300;
+}
+
+.footer-copyright {
+    background-color: #993300;
+    color: #ffffff;
+}
+
+.footer-link {
+    color: #ffff99;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ffff33;
+    text-shadow: #ffff99;
+}
+
+.footer-link:active {
+    color: #ffff66;
+    text-decoration: none;
+}
+
+.footer-link:visited {
+    color: #ffff33;
+    text-decoration: none;
+}
+
