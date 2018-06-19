@@ -93,8 +93,34 @@
             <div class="col-xs-6 center-chart">
                 <h3>Preferred Flavour Profile</h3>
                 <p>Average rating of the different flavour profiles separated in the data (when available).</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Pariatur quaerat tempora minus ipsa omnis officia eligendi rem praesentium voluptas repudiandae.</p>
+                <p>Each bar corresponds with one of the different "Clusters" or characteristics of a whiskey. 
+                For Bourbon and Bourbon-like whiskeys (R0 to R4), a classification based on rye content was used.</p>
+                <!-- Trigger/Open The Modal -->
+                <button id="clustersBtn">Cluster's Meaning</button>
+                <!-- The Modal -->
+                <div id="clustersModal" class="modal">
+                <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Different whiskey clusters:</h3>
+                        <p>A – Full-bodied, sweet, pronounced sherry – with fruity, honey and spicy notes.</p>
+                        <p>B – Full-bodied, sweet, pronounced sherry – with fruity, floral and malty notes, some honey and spicy notes may be evident</p>
+                        <p>C – Full-bodied, sweet, pronounced sherry – with fruity, floral, nutty, and spicy notes, some smoky notes may be evident</p>
+                        <p>E – Medium-bodied, medium-sweet – with fruity, honey, malty and winey notes, some smoky and spicy notes may be evident</p>
+                        <p>F – Full-bodied, sweet and malty – with fruity, spicy, and smoky notes</p>
+                        <p>G – Light-bodied, sweet, apéritif-style – with honey, floral, fruity and spicy notes, but rarely any smoky notes</p>
+                        <p>H – Very light-bodied, sweet, apéritif-style – with malty, fruity and floral notes</p>
+                        <p>I – Medium-bodied, medium-sweet, quite smoky – with some medicinal notes and spicy, fruity and nutty notes</p>
+                        <p>J – Full-bodied, dry, very smoky, pungent – with medicinal notes and some  spicy, malty and fruity notes</p>
+                        <p>R0 – (r = 0%) – “No Rye” whisky with 0 rye gain</p>
+                        <p>R1 – (r <= 10%) – “Low Rye” whisky of 10% or less rye grain</p>
+                        <p>R2 – (10% < r < =15%) – “Standard Rye” whisky of 10-15% rye grain</p>
+                        <p>R3 – (15% < r < 51%) – “High Rye” whisky of more 15% rye</p>
+                        <p>R4 – (r >= 51%) – “Rye” whisky of more than 51% rye</p>
+                        <p>For fuller descriptions and examples belonging to each cluster visit 
+                        <a href="http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/" target="_blank">whiskeyanalysis.com</a></p>
+                    </div>
+                </div>
                 <div id="preferred-flavour-profile" class="reset-chart"></div>
             </div>
 

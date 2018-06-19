@@ -294,7 +294,6 @@ $(document).ready(function() {
       }
     );
     
-    // PENDING - Add colour to the bars
     // PENDING - Add information on what does each cluster mean
     
     // var minRating = 0;
@@ -322,6 +321,9 @@ $(document).ready(function() {
               return valueAverage.toFixed(2);
           }
       })
+      // .title(function (d) {
+      //     return " has a Cluster of " + d.key[0];
+      // })
       .transitionDuration(300)
       .x(d3.scale.ordinal())
       .xUnits(dc.units.ordinal)
@@ -329,6 +331,32 @@ $(document).ready(function() {
       .xAxisLabel("Different Clusters (Sets of Flavour Profiles)")
       .yAxisLabel("Ratings from 0 to 10 Points")
       .yAxis().ticks(4);
+  
+    // Get the modal
+    var modal = document.getElementById('clustersModal');
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("clustersBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
   }
   
   function showMostDivisiveWhiskeys(ndx) {
@@ -373,7 +401,7 @@ $(document).ready(function() {
       .width(900)
       .height(300)
       .transitionDuration(300)
-      .mouseZoomable(true)
+      // .mouseZoomable(true)
       .x(d3.scale.linear().domain([minStdev, maxStdev]))
       .brushOn(true)
       .symbolSize(4)
