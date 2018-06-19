@@ -354,24 +354,29 @@ $(document).ready(function() {
     // a stdev of at least 0.91, which was the lowest score among the top 25 
     
     var stdevDim = ndx.dimension(function(d) {
-      if (d["STDEV"] >= 0.91) {
+      // if (d["STDEV"] >= 0.91) {
+      //   return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
+      // }
+      if (d["STDEV"] !== "n/a") {
         return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
       }
     });
     
     var mostDivisiveGroup = stdevDim.group();
     
-    var minStdev = 0.85;
+    // var minStdev = 0.85;
+    var minStdev = 0;
     var maxStdev = 5;
   
   // Render chart
     dc.scatterPlot("#most-divisive-whiskeys")
-      .width(300)
+      .width(900)
       .height(300)
       .transitionDuration(300)
+      .mouseZoomable(true)
       .x(d3.scale.linear().domain([minStdev, maxStdev]))
       .brushOn(true)
-      .symbolSize(6)
+      .symbolSize(4)
       .clipPadding(10)
       .yAxisLabel("Rating")
       .xAxisLabel("Standard Deviation")
@@ -382,6 +387,7 @@ $(document).ready(function() {
         return d.key[0];
       })
       .colors(stdevColors)
+      .elasticX(true)
       .dimension(stdevDim)
       .group(mostDivisiveGroup)
       .margins({top: 10, right: 50, bottom: 75, left: 75});
@@ -404,13 +410,13 @@ $(document).ready(function() {
       
       dc.pieChart("#best-value-whiskeys-piechart")
         .width(300)
-        .height(450)
-        .radius(90)
+        .height(400)
+        .radius(100)
         .transitionDuration(300)
         .minAngleForLabel(0.2)
         .dimension(priceRangeDim)
         .group(priceRangeGroup)
-        .legend(dc.legend().x(20).y(40)
+        .legend(dc.legend().x(20).y(0)
         .legendText(function(d) {
           if (d["name"] == "$") {
             return "$ for whiskies <$30 CAD";

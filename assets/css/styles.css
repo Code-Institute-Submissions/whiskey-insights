@@ -1,13 +1,20 @@
 /* Navbar */
 #my-navbar{
     height: 65px;
+    background-color: #ffeee6;
 }
 
 #navbar-title{
-    text-align: center;
-    font-size: 30px;
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold; 
     color: #993300;
-    margin-top: 12px;
+    margin-top: 24px;
+}
+
+.navbar-header {
+    font-size: 40px;
+    margin-top: 10px;
 }
 
 /* Main Container */
@@ -38,6 +45,13 @@
     position: relative;
 }
 
+#map-row {
+    padding: 10px;
+    background-color: #ffeee6;
+    width: 100%;
+    margin-left: 0;
+}
+
 .datamaps-bubble {
     /* PENDING - Eliminate stroke-width on the bubbles */
     /*border-color: transparent;*/
@@ -45,7 +59,6 @@
     stroke-width: 1px !important;
     /*border-width: 0px;*/
 }
-
 
 #toggle-map {
     border-radius: 5px;
@@ -60,18 +73,64 @@
     background-color: #cc4400;
 }
 
-/* Flex box graphs */
+/* Selector and reset */
 
-.center-charts {
+#selector-and-reset {
+    margin: 0;
+    padding: 10px;
+    background-color: #ffeee6;
+}
+
+#reset-button {
+    margin-top: 10px;
+}
+
+
+
+/* Center graphs */
+
+.center-chart-main {
     margin-top: 20px;
+    margin-left: 0;
+    /*display: flex;*/
+    background-color: #ff854d;
+    padding: 3px;
+    width: 100%;
+}
+
+.center-chart {
+    /*margin-top: 20px;*/
     /*display: flex;*/
     background-color: #ffeee6;
+    height: 500px;
+}
+
+.scatter-plot {
+    padding: 10px;
+    background-color: #ffeee6;
+    width: 100%;
+    margin-left: 0;
+    /*height: 500px;*/
+}
+
+#table-and-pagination {
+    /*margin-top: 20px;*/
+    /*display: flex;*/
+    margin: 0;
+    padding: 10px;
+    background-color: #ffeee6;
+    height: 550px;
 }
 
 /* dataTable */
 
 .dc-table-label {
     display: none;
+}
+
+.heading {
+    padding-bottom: 5px;
+    color: #993300;
 }
 
 #heading-1 {

@@ -31,7 +31,8 @@
         <div class="container-fluid" id="my-navbar">
             <a class="navbar-brand" href="index.html">
                 <div class="navbar-header">
-                    <img alt="whiskey-insight-brand-icon" src="assets/images/whiskey-glass.jpg">
+                    <!--<img alt="whiskey-insight-brand-icon" src="assets/images/whiskey-glass.jpg">-->
+                    <p>🥃</p>
                 </div>
             </a>
             <p id="navbar-title">Whiskey Insight - Drops of Information About Whiskeys of the World</p>
@@ -42,36 +43,54 @@
 
         <!-- Intro text -->
         <div class="row">
-            <h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt minima eos explicabo impedit veniam, iste dolorem non nemo officiis voluptatum deserunt maiores maxime, ipsa itaque.</h4>
+            <h4>The following series of charts will help whiskey lovers discover
+            some of the best bottles from around the world, while providing 
+            helpful insights for those involved in the whiskey industry.</h4>
+            <p>The graphs were possible thanks to data collected from 
+            <a href="http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/">
+                whiskeyanalysis.com</a>, "a scientific meta-analysis of whisky flavours and quality."</p>
         </div>
 
         <!-- The world Map goes here and the bubble chart within it -->
-        <div class="row">
-            <h3>Whiskeys per Country - <span id="toggle-map">Hide/Show Map</span></h3>
-            <div id="world-map"></div>
+        <div class="center-chart-main">
+            <div class="row" id="map-row">
+                <h3>Whiskeys per Country - <span id="toggle-map">Hide/Show Map</span></h3>
+                <div id="world-map"></div>
+            </div>
         </div>
-
+        
         <!-- Selector and Reset Button -->
-        <div class="row">
-            <!-- The selector goes here -->
-            <div class="col-xs-6">
-                <h3>Filter by Country </h3>
-                <div id="country-selector"></div>
-            </div>
-
-            <!-- The reset button here -->
-            <div class="col-xs-6">
-                <!--<h3>Reset all Selections </h3>-->
-                <!--<div id="reset-button"></div>-->
-                <input id="reset-button" class="btn" type="button" value="Reset all Selections" />
-                <!--<span><a href="javascript:dc.filterAll(); dc.renderAll(); dc.redrawAll(); dc.refocusAll();">Reset All</a></span>-->
+        <div class="center-chart-main">
+            <div class="row" id="selector-and-reset">
+                <!-- The selector goes here -->
+                <div class="col-xs-6">
+                    <h3>Filter by Country </h3>
+                    <div id="country-selector"></div>
+                </div>
+    
+                <!-- The reset button here -->
+                <div class="col-xs-6">
+                    <!--<h3>Reset all Selections </h3>-->
+                    <!--<div id="reset-button"></div>-->
+                    <input id="reset-button" class="btn" type="button" value="Reset all Selections" />
+                    <!--<span><a href="javascript:dc.filterAll(); dc.renderAll(); dc.redrawAll(); dc.refocusAll();">Reset All</a></span>-->
+                </div>
             </div>
         </div>
-
-        <!-- The bar chart, scatter plot and pie chart-->
-        <div class="row center-charts">
+        <!-- The scatter plot goes here -->
+        <div class="center-chart-main">
+            <div class="row scatter-plot">
+                <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
+                    <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
+                        This shows that there's less consensus on their final score.</p>
+                <div id="most-divisive-whiskeys" class="reset-chart"></div>
+            </div>
+        </div>
+        
+        <!-- The bar chart and pie chart go here-->
+        <div class="row center-chart-main">
             <!-- The bar chart goes here -->
-            <div class="col-xs-5">
+            <div class="col-xs-6 center-chart">
                 <h3>Preferred Flavour Profile</h3>
                 <p>Average rating of the different flavour profiles separated in the data (when available).</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
@@ -79,46 +98,39 @@
                 <div id="preferred-flavour-profile" class="reset-chart"></div>
             </div>
 
-            <!-- The scatter plot goes here -->
-            <div class="col-xs-4">
-                <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
-                <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
-                    This shows that there's less consensus on their final score.</p>
-                Below, the top 25 most divisive whiskeys from the sample.</p>
-                <div id="most-divisive-whiskeys" class="reset-chart"></div>
-            </div>
-            
             <!-- The pie chart goes here -->
-            <div class="col-xs-3">
+            <div class="col-xs-6 center-chart">
                 <h3>Let's Talk Value</h3>
                 <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
                 </p>
                 <div id="best-value-whiskeys-piechart" class="reset-chart"></div>
-            </div>
+                </div>
         </div>
 
 
         <!-- The dataTable goes here -->
-        <div class="row col col-xs-12">
-            <h3>Show Best Rated Whiskeys</h3>
-            <p>Below, a list of the best rated bottles from our selection</p>
-            <p>Click on a price range to get the best rated bottles in that cost
-            </p>
-            <table id="value-table" class="reset-chart">
-                <thead>
-                    <tr>
-                        <th id="heading-1">Rating</th>
-                        <th id="heading-2">Name of Whiskey</th>
-                        <th id="heading-3">Price Range</th>
-                    </tr>
-                </thead>
-            </table>
-            <div id="paging">
-                Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
-                <input id="first" class="btn paging-btn" type="button" value="First" />
-                <input id="previous" class="btn paging-btn" type="Button" value="Previous" />
-                <input id="next" class="btn paging-btn" type="button" value="Next" />
-                <input id="last" class="btn paging-btn" type="Button" value="Last" />
+        <div class="center-chart-main">
+            <div class="row" id="table-and-pagination">
+                <h3>Show Best Rated Whiskeys</h3>
+                <p>Below, a list of the best rated bottles from our selection</p>
+                <p>Click on a price range to get the best rated bottles in that cost
+                </p>
+                <table id="value-table" class="reset-chart">
+                    <thead>
+                        <tr>
+                            <th class="heading" id="heading-1">Rating</th>
+                            <th class="heading" id="heading-2">Name of Whiskey</th>
+                            <th class="heading" id="heading-3">Price Range</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div id="paging">
+                    Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.
+                    <input id="first" class="btn paging-btn" type="button" value="First" />
+                    <input id="previous" class="btn paging-btn" type="Button" value="Previous" />
+                    <input id="next" class="btn paging-btn" type="button" value="Next" />
+                    <input id="last" class="btn paging-btn" type="Button" value="Last" />
+                </div>
             </div>
         </div>
     </div>
