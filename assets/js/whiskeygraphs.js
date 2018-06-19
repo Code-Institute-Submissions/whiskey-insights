@@ -470,6 +470,12 @@ $(document).ready(function() {
     var totalPages = ndx.size();
     console.log(totalPages);
     
+    // I need a value that tells "Next" and "Last" not to go until the end if
+    // the filters give a lower number of samples to render in the table or if 
+    // I've moved from ofs 1 in my pagination
+    var remainingTotalPages = totalPages - (ofs+pageSize-1);
+    console.log(remainingTotalPages);
+    
     // jquery events for the buttons - START
     
     $("#first").on("click", function(){
@@ -509,74 +515,35 @@ $(document).ready(function() {
         return +d["MetaCritic"]; 
       }
     };
-    
-  // rank = function (p) { return "rank" };
-  // rating = function (p) { return "MetaCritic" };
   
     // Render our data table
     
     var dataTable = dc.dataTable("#value-table")
     
-    // var LABEL_CSS_CLASS = "dc-table-label";
-    // var ROW_CSS_CLASS = "dc-table-row";
-    // var COLUMN_CSS_CLASS = "dc-table-column";
-    // var GROUP_CSS_CLASS = "dc-table-group";
-    // var HEAD_CSS_CLASS = "dc-table-head";
-    
-    // // with a th for each column
-    // var headcols = headrow.selectAll("th")
-    //   .data(_columns);
-    //   headcols.exit().remove();
-    //   headcols.enter().append("th")
-    //   .merge(headcols)
-    //         .attr('class', HEAD_CSS_CLASS)
-    //         .html(function (d) {
-    //             return (_chart._doColumnHeaderFormat(d));
-    //         });
-    // }
-    
-    // $("#value-table").preppend("<tr></tr>");
-  
-    // dc.dataTable("#value-table")
     dataTable
       .width(800)
       .height(270)
       .dimension(whiskeyRatingDim)
       .group(whiskeyRatingGroup)
-      .columns([function (d) { return +d["MetaCritic"] },
-                function (d) { return d["Whisky"] },
-                function (d) { return d["Cost"] }])
-      // .columns([
-      //   { 
-      //     label: "Rating",
-      //     format: function (d) { return d["MetaCritic"] },
-      //   },
-      //   {
-      //     label: "Whiskey",
-      //     function (d) { return d["Whisky"] },
-      //   },
-      //   {
-      //     label: "Price",
-      //     function (d) { return d["Cost"] },
-      //   }
-      // ])
+      .columns([
+        function (d) { return +d["MetaCritic"] },
+        function (d) { return d["Whisky"] },
+        function (d) { return d["Cost"] }])
       .size(Infinity)
       .order(d3.descending);
       
     update();
     dataTable.render();
-      // chart.render();
-      
-    // Creating pagination - START
-    
+
     function display() {
+
       d3.select("#begin").text(ofs);
       d3.select("#end").text(ofs+pageSize-1);
+      d3.select("#size").text(ndx.size());
       d3.select("#first").attr("disabled", ofs<=1 ? "true" : null);
       d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
       d3.select("#next").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
       d3.select("#last").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
-      d3.select("#size").text(ndx.size());
     }
     
     function update() {
