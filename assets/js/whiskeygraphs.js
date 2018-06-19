@@ -358,7 +358,7 @@ $(document).ready(function() {
       //   return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
       // }
       if (d["STDEV"] !== "n/a") {
-        return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
+        return [+d["STDEV"], +d["MetaCritic"], d["Whisky"]]; 
       }
     });
     
@@ -477,13 +477,13 @@ $(document).ready(function() {
     
     var whiskeyRatingDim = ndx.dimension(function(d) {
       if (["MetaCritic"] !== "n/a") {
-        return d["MetaCritic"];
+        return +d["MetaCritic"];
       }
     });
     
     var whiskeyRatingGroup = function(d) {
       if (d["MetaCritic"] !== d["MetaCritic"]) {
-        return d["MetaCritic"]; 
+        return +d["MetaCritic"]; 
       }
     };
     
@@ -520,7 +520,7 @@ $(document).ready(function() {
       .height(270)
       .dimension(whiskeyRatingDim)
       .group(whiskeyRatingGroup)
-      .columns([function (d) { return d["MetaCritic"] },
+      .columns([function (d) { return +d["MetaCritic"] },
                 function (d) { return d["Whisky"] },
                 function (d) { return d["Cost"] }])
       // .columns([
