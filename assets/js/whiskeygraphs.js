@@ -4,13 +4,12 @@ $(document).ready(function() {
   queue()
       .defer(d3.csv, "assets/data/whiskey-insight.csv")
       .await(getCountryData);
-      
-  // We create a variable with an object (whiskeyBubbles) to determine the number of bottles per country,
-  // and a variable with a number (whiskeyTotal), to calculate the total of bottles reviewd
-  
 
-  
   function getCountryData(error, whiskeyData) {
+    
+    // We create a variable with an object (whiskeyBubbles) to determine the 
+    // number of bottles per country, and a variable with a number 
+    // (whiskeyTotal), to calculate the total of bottles reviewd
     
     var whiskeyBubbles = new Object();
   
@@ -28,10 +27,6 @@ $(document).ready(function() {
         whiskeyTotal++;
       }
     }
-      
-    // console.log(whiskeyBubbles);
-    
-    // console.log(whiskeyTotal);
       
     // Below, we start to create the individual bubbles
   
@@ -63,8 +58,9 @@ $(document).ready(function() {
       }
     });
     
-    // To calculate the radius, I've done a rule of three to help me scale them up 
-    // because otherwise the bigger radius would make the chart impossible to read
+    // To calculate the radius, I've done a rule of three to help me scale 
+    // them up because otherwise the bigger radius would make the chart 
+    // impossible to read. Then I've edited the sizes so they are legible
     
     // function calculateradius(countryTotal) {
     //   return countryTotal*100/whiskeyTotal;
@@ -324,7 +320,7 @@ $(document).ready(function() {
       // .title(function (d) {
       //     return " has a Cluster of " + d.key[0];
       // })
-      .transitionDuration(300)
+      .transitionDuration(500)
       .x(d3.scale.ordinal())
       .xUnits(dc.units.ordinal)
       .elasticY(true)
@@ -353,6 +349,49 @@ $(document).ready(function() {
         }
     };
   }
+  
+  // Now, I'll write a pie chart to show the amount of samples 
+  // per different price ranges
+    
+  function showWhiskeysPerPriceRange(ndx) {
+      // Define our vars for dimension and group
+      
+      var priceRangeDim = ndx.dimension(function(d) {
+        if (d["Cost"] !== "n/a") {
+          return d["Cost"];
+        }
+      });
+      var priceRangeGroup = priceRangeDim.group();
+      
+      // Render our pie chart
+      
+      dc.pieChart("#best-value-whiskeys-piechart")
+        .width(300)
+        .height(400)
+        .radius(100)
+        .transitionDuration(500)
+        .minAngleForLabel(0.2)
+        .dimension(priceRangeDim)
+        .group(priceRangeGroup)
+        .legend(dc.legend().x(20).y(0)
+        .legendText(function(d) {
+          if (d["name"] == "$") {
+            return "$ for whiskies <$30 CAD";
+          } else if (d["name"] == "$$") {
+            return "$$ for whiskies between $30~$50 CAD";
+          } else if (d["name"] == "$$$") {
+            return "$$$ for whiskies between $50-$70 CAD";
+          } else if (d["name"] == "$$$$") {
+            return "$$$$ for whiskies between $70~$125 CAD";
+          } else if (d["name"] == "$$$$$") {
+            return "$$$$$ for whiskies between $125~$300 CAD";
+          } else if (d["name"] == "$$$$$$") {
+            return "$$$$$$ refers to all whiskies >$300 CAD";
+          }
+        }
+        ));
+        // PENDING - Get the legendText to render correctly
+    }
   
   function showMostDivisiveWhiskeys(ndx) {
     
@@ -395,7 +434,7 @@ $(document).ready(function() {
     dc.scatterPlot("#most-divisive-whiskeys")
       .width(900)
       .height(300)
-      .transitionDuration(300)
+      .transitionDuration(500)
       // .mouseZoomable(true)
       .x(d3.scale.linear().domain([minStdev, maxStdev]))
       .brushOn(true)
@@ -415,52 +454,9 @@ $(document).ready(function() {
       .group(mostDivisiveGroup)
       .margins({top: 10, right: 50, bottom: 75, left: 75});
   }
-    
-    // // Now, I'll write a pie chart to show the amount of samples 
-    // // per different price ranges
-    
-  function showWhiskeysPerPriceRange(ndx) {
-      // Define our vars for dimension and group
-      
-      var priceRangeDim = ndx.dimension(function(d) {
-        if (d["Cost"] !== "n/a") {
-          return d["Cost"];
-        }
-      });
-      var priceRangeGroup = priceRangeDim.group();
-      
-      // Render our pie chart
-      
-      dc.pieChart("#best-value-whiskeys-piechart")
-        .width(300)
-        .height(400)
-        .radius(100)
-        .transitionDuration(300)
-        .minAngleForLabel(0.2)
-        .dimension(priceRangeDim)
-        .group(priceRangeGroup)
-        .legend(dc.legend().x(20).y(0)
-        .legendText(function(d) {
-          if (d["name"] == "$") {
-            return "$ for whiskies <$30 CAD";
-          } else if (d["name"] == "$$") {
-            return "$$ for whiskies between $30~$50 CAD";
-          } else if (d["name"] == "$$$") {
-            return "$$$ for whiskies between $50-$70 CAD";
-          } else if (d["name"] == "$$$$") {
-            return "$$$$ for whiskies between $70~$125 CAD";
-          } else if (d["name"] == "$$$$$") {
-            return "$$$$$ for whiskies between $125~$300 CAD";
-          } else if (d["name"] == "$$$$$$") {
-            return "$$$$$$ refers to all whiskies >$300 CAD";
-          }
-        }
-        ));
-        // PENDING - Get the legendText to render correctly
-    }
-    
-    // Now, we'll folow by creating tables that will show when selecting the 
-    // different price ranges - START
+
+  // Now, we'll folow by creating tables that will show when selecting the 
+  // different price ranges - START
     
   function showBestValueWhiskeys(ndx) {
     
