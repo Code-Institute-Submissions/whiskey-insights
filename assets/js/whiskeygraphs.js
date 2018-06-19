@@ -468,14 +468,12 @@ $(document).ready(function() {
     var pageSize = 15;
     
     var totalPages = ndx.size();
-    console.log(totalPages);
-    
+
     // I need a value that tells "Next" and "Last" not to go until the end if
     // the filters give a lower number of samples to render in the table or if 
     // I've moved from ofs 1 in my pagination
     var remainingTotalPages = totalPages - (pageSize-ofs);
-    console.log(remainingTotalPages);
-    
+
     // jquery events for the buttons - START
     
     $("#first").on("click", function(){
