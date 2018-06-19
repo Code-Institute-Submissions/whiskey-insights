@@ -473,7 +473,7 @@ $(document).ready(function() {
     // I need a value that tells "Next" and "Last" not to go until the end if
     // the filters give a lower number of samples to render in the table or if 
     // I've moved from ofs 1 in my pagination
-    var remainingTotalPages = totalPages - (ofs+pageSize-1);
+    var remainingTotalPages = totalPages - (pageSize-ofs);
     console.log(remainingTotalPages);
     
     // jquery events for the buttons - START
@@ -497,7 +497,7 @@ $(document).ready(function() {
     });
     
     $("#last").on("click", function(){
-      ofs = totalPages-pageSize+ofs;
+      ofs = remainingTotalPages;
       update();
       dataTable.redraw();
     });
