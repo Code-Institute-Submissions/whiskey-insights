@@ -48,6 +48,10 @@ $(document).ready(function() {
     $("#reset-button").on("click", function() {
           dc.filterAll();
           dc.redrawAll();
+          $(".paging-btn").each(function() {
+            console.log($(this));
+            $(this).attr("disabled", false)
+          });
     });
   }
     
