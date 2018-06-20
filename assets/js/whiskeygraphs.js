@@ -247,7 +247,7 @@ $(document).ready(function() {
     
   function showBestValueWhiskeys(ndx) {
     
-    var ofs = 1;
+    var ofs = 0;
     var pageSize = 15;
     
     // var totalPages = ndx.groupAll().reduce(
@@ -318,13 +318,16 @@ $(document).ready(function() {
     function update() {
       dataTable.beginSlice(ofs);
       dataTable.endSlice(ofs+pageSize);
+      console.log(ofs + 1, ofs + 1 + pageSize);
+      $('#whiskey-count-begin').html(ofs + 1);
+      $('#whiskey-count-end').html(ofs + 1 + pageSize);
       // display();
     }
     
     // jquery events for the buttons - START
     
     $("#first").on("click", function(){
-      ofs = 1;
+      ofs = 0;
       update();
       dataTable.redraw();
     });
