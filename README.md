@@ -10,4 +10,6 @@ TopoJSON: https://github.com/topojson/topojson
 
 Modal: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
 
+Back to top button: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_scroll_to_top
+
 Footer: https://mdbootstrap.com/components/bootstrap-footer/

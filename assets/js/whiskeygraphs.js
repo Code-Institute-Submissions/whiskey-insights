@@ -247,13 +247,87 @@ $(document).ready(function() {
     var ofs = 1;
     var pageSize = 15;
     
-    var totalPages = ndx.size();
+    // var totalPages = ndx.size();
 
     // I need a value that tells "Next" and "Last" not to go until the end if
     // the filters give a lower number of samples to render in the table or if 
     // I've moved from ofs 1 in my pagination
-    var remainingTotalPages = totalPages - (pageSize-ofs);
+    // var remainingTotalPages = totalPages - (pageSize-ofs);
+    
+    // Define dimensions and groups
+    var whiskeyRatingDim = ndx.dimension(function(d) {
+      if (["MetaCritic"] !== "n/a") {
+        return +d["MetaCritic"];
+      }
+    });
+    
+    var whiskeyRatingGroup = function(d) {
+      if (d["MetaCritic"] !== d["MetaCritic"]) {
+        return +d["MetaCritic"]; 
+      }
+    };
+    
+    var whiskeyPaginationGroup = ndx.groupAll().reduce(
+      function (p, v) {
+              ++p.n;
+              p.tot += v.MetaCritic;
+              return p;
+          },
+          function (p, v) {
+              --p.n;
+              p.tot -= v.MetaCritic;
+              return p;
+          },
+          function () { return {n:0,tot:0}; }
+    );
+     
+    // var average = function(d) {
+    //   return d.n ? d.tot / d.n : 0;
+    // };
+    var whiskeyCount = function(d) {
+      return d.n;
+    };
+    var whiskeyBegin = function(d) {
+      return ofs;
+      // if ( current pagination < 1 ) {
+      //   return disable
+      // } else if ( current pagination = 1 ) {
+      //   return ofs
+      // } else {
+      //   return off + (sum of all previous pageSize passed)
+      // }
+    };
+    var whiskeyEnd = function(d) {
+      return pageSize;
+      // if ( current pagination < 1 ) {
+      //   return disable
+      // } else if ( current pagination = 1 ) {
+      //   return pageSize;
+      // } else {
+      //   return (sum of all paginations so far + pageSize)
+      // }
+    };
+    
+    
+    // // Define display() function
+    function display() {
 
+      d3.select("#first").attr("disabled", ofs<=1 ? "true" : null);
+      d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
+      // d3.select("#next").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
+      d3.select("#next").attr("disabled", ofs+pageSize>=whiskeyCount ? "true" : null);
+      // d3.select("#last").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
+      d3.select("#last").attr("disabled", ofs+pageSize>=whiskeyCount ? "true" : null);
+    }
+
+    // Define update() function
+    
+    function update() {
+      dataTable.beginSlice(ofs);
+      dataTable.endSlice(ofs+pageSize);
+      display();
+    }
+    
     // jquery events for the buttons - START
     
     $("#first").on("click", function(){
@@ -281,18 +355,6 @@ $(document).ready(function() {
     });
      
     // jquery events for the buttons - END
-    
-    var whiskeyRatingDim = ndx.dimension(function(d) {
-      if (["MetaCritic"] !== "n/a") {
-        return +d["MetaCritic"];
-      }
-    });
-    
-    var whiskeyRatingGroup = function(d) {
-      if (d["MetaCritic"] !== d["MetaCritic"]) {
-        return +d["MetaCritic"]; 
-      }
-    };
   
     // Render our data table
     
@@ -312,23 +374,19 @@ $(document).ready(function() {
       
     update();
     dataTable.render();
-
-    function display() {
-
-      d3.select("#begin").text(ofs);
-      d3.select("#end").text(ofs+pageSize-1);
-      d3.select("#size").text(ndx.size());
-      d3.select("#first").attr("disabled", ofs<=1 ? "true" : null);
-      d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
-      d3.select("#next").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
-      d3.select("#last").attr("disabled", ofs+pageSize>=ndx.size() ? "true" : null);
-    }
     
-    function update() {
-      dataTable.beginSlice(ofs);
-      dataTable.endSlice(ofs+pageSize);
-      display();
-    }
+    // Locate numberDisplay in out HTML - START
+    var totalWhiskeyCount = dc.numberDisplay("#whiskey-count-size")
+    var startingWhiskeyCount = dc.numberDisplay("#whiskey-count-begin")
+    var endingWhiskeyCount = dc.numberDisplay("#whiskey-count-end")
+    
+    // Call all number displays - START
+    totalWhiskeyCount.group(whiskeyPaginationGroup).formatNumber(d3.format("d")).valueAccessor(whiskeyCount);
+    startingWhiskeyCount.group(whiskeyPaginationGroup).formatNumber(d3.format("d")).valueAccessor(whiskeyBegin);
+    endingWhiskeyCount.group(whiskeyPaginationGroup).formatNumber(d3.format("d")).valueAccessor(whiskeyEnd);
+    // Call all number displays - END
+    
+    // Will try to add a number display from the example - END
       
   }
 });
