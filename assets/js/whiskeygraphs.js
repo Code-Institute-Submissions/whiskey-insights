@@ -46,7 +46,6 @@ $(document).ready(function() {
   
   function showResetButton(ndx) {
     $("#reset-button").on("click", function() {
-        $(".reset-chart")
           dc.filterAll();
           dc.redrawAll();
     });
@@ -290,38 +289,34 @@ $(document).ready(function() {
     };
     // Define dimensions and groups for dataTable - END
     
-    // // Define variables to obtain values that will feed our numberDisplay - START
-    // var whiskeyCount = function(d) {
-    //   return d.count;
-    // };
-
-    // var whiskeyBegin = function(d) {
-      
-    // };
-    // var whiskeyEnd = function(d) {
-    //   return whiskeyCount(d);
-    // };
-    // // Define variables to obtain values that will feed our numberDisplay - END
-    
-    
-    // // // Define display() function
-    // function display() {
-
-    //   d3.select("#first").attr("disabled", ofs<=1 ? "true" : null);
-    //   d3.select("#previous").attr("disabled", ofs<=1 ? "true" : null);
-    //   d3.select("#next").attr("disabled", ofs+pageSize>=totalPages ? "true" : null);
-    //   d3.select("#last").attr("disabled", ofs+pageSize>=totalPages ? "true" : null);
-    // }
+    var filteredTotal = ndx.groupAll();
+      dc.numberDisplay("#whiskey-count-size")
+          .formatNumber(d3.format("d"))
+          .valueAccessor(function (d) {
+              return (+d);
+          })
+          .group(filteredTotal);
+          
+    // Define display() function
+    function display() {
+      // console.log(filteredTotal.value());
+      d3.select("#first").attr("disabled", ofs <= 1 ? "true" : null);
+      d3.select("#previous").attr("disabled", ofs <= 1 ? "true" : null);
+      d3.select("#next").attr("disabled", ofs + pageSize >= filteredTotal.value() ? "true" : null);
+      d3.select("#last").attr("disabled", ofs + pageSize >= filteredTotal.value() ? "true" : null);
+    }
 
     // Define update() function
-    
     function update() {
       dataTable.beginSlice(ofs);
       dataTable.endSlice(ofs+pageSize);
-      console.log(ofs + 1, ofs + 1 + pageSize);
-      $('#whiskey-count-begin').html(ofs + 1);
-      $('#whiskey-count-end').html(ofs + 1 + pageSize);
-      // display();
+      console.log(ofs + 1, ofs + pageSize);
+      // $('#whiskey-count-begin').html(ofs + 1);
+      // $('#whiskey-count-end').html(ofs + 1 + pageSize);
+      $("#whiskey-count-begin").html(ofs + 1);
+      $("#whiskey-count-end").html(ofs + pageSize);
+      // $("#whiskey-count-size").html(d);
+      display();
     }
     
     // jquery events for the buttons - START
@@ -345,7 +340,7 @@ $(document).ready(function() {
     });
     
     $("#last").on("click", function(){
-      ofs = totalWhiskeyCount;
+      ofs = filteredTotal.value() - pageSize;
       update();
       dataTable.redraw();
     });
@@ -384,14 +379,5 @@ $(document).ready(function() {
     
     // // Will try to add a number display from the example - END
      
-     var testFilteredTotal = ndx.groupAll();
-        dc.numberDisplay("#whiskey-count-size")
-            .formatNumber(d3.format("d"))
-            .valueAccessor(function (d) {
-                return (+d);
-            })
-            .group(testFilteredTotal); 
-      
-      var testFilteredEnd = ndx.groupAll()
   }
 });

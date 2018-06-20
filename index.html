@@ -28,28 +28,8 @@
 
 <body>
 
-    <!-- Need to find a way to make it work from effects.js -->
-    <script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function() {scrollFunction()};
-        
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("topBtn").style.display = "block";
-            } else {
-                document.getElementById("topBtn").style.display = "none";
-            }
-        }
-        
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
-
-    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
-    <!--<button id="topBtn" title="Go to top">Top</button>-->
+    <!--<button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>-->
+    <button id="topBtn" title="Go to top">Top</button>
 
     <nav class="navbar navbar-default">
         <div class="container-fluid" id="my-navbar">
@@ -177,11 +157,17 @@
                 </table>
                 <div id="paging">
                     <!--Showing <span id="begin"></span>-<span id="end"></span> of <span id="size"></span>.-->
-                    Showing <span id="whiskey-count-begin"></span>-<span id="whiskey-count-end"></span> of <span id="whiskey-count-size"></span>.
-                    <input id="first" class="btn paging-btn" type="button" value="First" />
-                    <input id="previous" class="btn paging-btn" type="Button" value="Previous" />
-                    <input id="next" class="btn paging-btn" type="button" value="Next" />
-                    <input id="last" class="btn paging-btn" type="Button" value="Last" />
+                    <div class="row">
+                        <div class="col-xs-3">
+                            Showing <span id="whiskey-count-begin"></span> - <span id="whiskey-count-end"></span> of <span id="whiskey-count-size"></span>
+                        </div>
+                        <div class="col-xs-9">
+                            <input id="first" class="btn paging-btn" type="button" value="First" />
+                            <input id="previous" class="btn paging-btn" type="Button" value="Previous" />
+                            <input id="next" class="btn paging-btn" type="button" value="Next" />
+                            <input id="last" class="btn paging-btn" type="Button" value="Last" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
