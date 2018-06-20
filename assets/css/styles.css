@@ -119,6 +119,11 @@
     height: 550px;
 }
 
+#table-container {
+    min-height: 350px;
+    background-color: #ffffff;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
