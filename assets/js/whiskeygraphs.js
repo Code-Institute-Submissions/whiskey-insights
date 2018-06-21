@@ -1,6 +1,7 @@
 // PENDING - Get the legendText in the piechart to render correctly
 // PENDING - Fix pagination 
-// Pending - Make charts responsive
+// PENDING - Make charts responsive
+// PENDING - Why does the dataTable shows a lesser rated whiskey on the first row?
 
 $(document).ready(function() {
       // console.log( "ready!" );

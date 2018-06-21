@@ -1,13 +1,14 @@
 /* Navbar */
-#my-navbar{
+
+#my-navbar {
     height: 65px;
     background-color: #ffeee6;
 }
 
-#navbar-title{
+#navbar-title {
     text-align: left;
     font-size: 24px;
-    font-weight: bold; 
+    font-weight: bold;
     color: #993300;
     margin-top: 24px;
 }
@@ -61,7 +62,7 @@
 
 #toggle-map {
     border-radius: 5px;
-    font-style: italic; 
+    font-style: italic;
     font-size: 20px;
     padding: 4px;
     background-color: #ff661a;
@@ -129,21 +130,32 @@
 }
 
 /* The Modal (background) */
+
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 20px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 20px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 /* Modal Button */
+
 #clustersBtn {
     border-radius: 5px;
     border-color: transparent;
@@ -158,6 +170,7 @@
 }
 
 /* Modal Content */
+
 .modal-content {
     background-color: #fefefe;
     margin: auto;
@@ -177,6 +190,7 @@
 }
 
 /* The Close Button */
+
 .close {
     color: #ff661a;
     opacity: 0.8;
@@ -199,7 +213,7 @@
 }
 
 table {
-    margin-left:40px;
+    margin-left: 40px;
     background-color: #ffffff;
 }
 
@@ -245,10 +259,10 @@ table {
 @media (max-width:411px) {
     #table-and-pagination-container {
         min-height: 950px;
-    } 
+    }
     #table-and-pagination {
         min-height: 945px;
-    }  
+    }
 }
 
 @media (max-width:768px) {
@@ -270,7 +284,7 @@ table {
         height: 150px;
     }
     #intro-text {
-        margin:0px 5px 0px 5px;
+        margin: 0px 5px 0px 5px;
     }
 }
 
@@ -288,26 +302,28 @@ table {
 /* Back to top button */
 
 #topBtn {
-  display: none;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: #cc4400;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;;
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #cc4400;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    ;
 }
 
 #topBtn:hover {
-  background-color: #ff661a;
+    background-color: #ff661a;
 }
 
 /* Footer */
+
 .page-footer {
     background-color: #ff9966;
 }
@@ -342,4 +358,3 @@ table {
     color: #ffff33;
     text-decoration: none;
 }
-
