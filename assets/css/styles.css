@@ -110,6 +110,11 @@
     /*height: 500px;*/
 }
 
+.scatter-plot .extent {
+    color: #adc2eb;
+    opacity: 0.3;
+}
+
 #table-and-pagination {
     /*margin-top: 20px;*/
     /*display: flex;*/

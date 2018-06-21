@@ -375,8 +375,8 @@ $(document).ready(function() {
     update();
     dataTable.render();
     
-    // Trying to get the pagination to update when changing the filters - START
-    $("#first, #previous, #next, #last, #country-selector, #showPreferredFlavourProfiles, showMostDivisiveWhiskeys, showWhiskeysPerPriceRange").on("click", function() {
+    // Disable Effects update when changing the filters - START
+    $("#first, #previous, #next, #last, #country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("click", function() {
       if (( ofs <= 0 ) && ( (ofs + pageSize) >= filteredTotal.value() )) {
         $("#first").attr("disabled", true);
         $("#previous").attr("disabled", true);
@@ -399,12 +399,15 @@ $(document).ready(function() {
         });
       }
     });
-    // Trying to get the pagination to update when changing the filters - END
+    // Disable Effects update when changing the filters - END
     
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - START
-    $("#country-selector, #showPreferredFlavourProfiles, showMostDivisiveWhiskeys, showWhiskeysPerPriceRange").on("click", function() {
-      // update();
-      dataTable.redraw();
+    $("#country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("click", function() {
+      dataTable.beginSlice(ofs);
+      dataTable.endSlice(ofs+pageSize);
+      $("#whiskey-count-begin").html(ofs + 1);
+      $("#whiskey-count-end").html(ofs + pageSize);
+      // display();
     });
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
   }
