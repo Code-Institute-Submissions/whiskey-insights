@@ -46,7 +46,7 @@
     <div class="container" id="main-container">
 
         <!-- Intro text -->
-        <div class="row">
+        <div class="row" id="intro-text">
             <h4>The following series of charts will help whiskey lovers discover
             some of the best bottles from around the world, while providing 
             helpful insights for those involved in the whiskey industry.</h4>
@@ -67,13 +67,13 @@
         <div class="center-chart-main">
             <div class="row" id="selector-and-reset">
                 <!-- The selector goes here -->
-                <div class="col-xs-6">
+                <div class="col-sm-6 col-xs-12">
                     <h3>Filter by Country </h3>
                     <div id="country-selector"></div>
                 </div>
     
                 <!-- The reset button here -->
-                <div class="col-xs-6">
+                <div class="col-sm-6 col-xs-12">
                     <!--<h3>Reset all Selections </h3>-->
                     <!--<div id="reset-button"></div>-->
                     <input id="reset-button" class="btn" type="button" value="Reset all Selections" />
@@ -85,7 +85,7 @@
         <!-- The bar chart and pie chart go here-->
         <div class="row center-chart-main">
             <!-- The bar chart goes here -->
-            <div class="col-xs-6 center-chart">
+            <div class="col-sm-6 col-xs-12 center-chart">
                 <h3>Preferred Flavour Profile - 
                 <span><!-- Trigger/Open The Modal -->
                 <button id="clustersBtn">Clusters' Meaning</button>
@@ -121,7 +121,7 @@
             </div>
 
             <!-- The pie chart goes here -->
-            <div class="col-xs-6 center-chart">
+            <div class="col-sm-6 col-xs-12 center-chart">
                 <h3>Let's Talk Value</h3>
                 <p>There are plenty of high rated samples across all different price points, so no matter one's budget, it's possible to find great whiskey!
                 </p>
@@ -140,7 +140,7 @@
         </div>
 
         <!-- The dataTable goes here -->
-        <div class="center-chart-main">
+        <div class="center-chart-main" id="table-and-pagination-container">
             <div class="row" id="table-and-pagination">
                 <h3>Show Best Rated Whiskeys</h3>
                 <p>Below, a list of the best rated bottles from our selection</p>

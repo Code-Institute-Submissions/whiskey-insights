@@ -156,6 +156,11 @@ $(document).ready(function() {
       
       // Render our pie chart
       
+      // Prep for the legend - START
+      
+
+      // Prep for the legend - END
+      
       dc.pieChart("#best-value-whiskeys-piechart")
         .width(300)
         .height(400)
@@ -165,24 +170,23 @@ $(document).ready(function() {
         .dimension(priceRangeDim)
         .group(priceRangeGroup)
         .legend(dc.legend().x(20).y(0)
-        .legendText(function(d) {
-          if (d["name"] == "$") {
-            return "$ for whiskies <$30 CAD";
-          } else if (d["name"] == "$$") {
-            return "$$ for whiskies between $30~$50 CAD";
-          } else if (d["name"] == "$$$") {
-            return "$$$ for whiskies between $50-$70 CAD";
-          } else if (d["name"] == "$$$$") {
-            return "$$$$ for whiskies between $70~$125 CAD";
-          } else if (d["name"] == "$$$$$") {
-            return "$$$$$ for whiskies between $125~$300 CAD";
-          } else if (d["name"] == "$$$$$$") {
-            return "$$$$$$ refers to all whiskies >$300 CAD";
-          }
-        }
-        ));
+          .legendText(function(d) {
+            if (d["name"] == "$") {
+              return "$ for whiskies <$30 CAD";
+            } else if (d["name"] == "$$") {
+              return "$$ for whiskies between $30~$50 CAD";
+            } else if (d["name"] == "$$$") {
+              return "$$$ for whiskies between $50-$70 CAD";
+            } else if (d["name"] == "$$$$") {
+              return "$$$$ for whiskies between $70~$125 CAD";
+            } else if (d["name"] == "$$$$$") {
+              return "$$$$$ for whiskies between $125~$300 CAD";
+            } else if (d["name"] == "$$$$$$") {
+              return "$$$$$$ refers to all whiskies >$300 CAD";
+            }
+        })
+      );
     }
-  
   function showMostDivisiveWhiskeys(ndx) {
     
     // This chart will highlight whiskeys that made reviewers disagree, this 
@@ -222,7 +226,8 @@ $(document).ready(function() {
   
   // Render chart
     dc.scatterPlot("#most-divisive-whiskeys")
-      .width(900)
+      .width(innerWidth/1.2)
+      // .with(900)
       .height(300)
       .transitionDuration(500)
       // .mouseZoomable(true)
@@ -405,9 +410,6 @@ $(document).ready(function() {
     $("#country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("click", function() {
       dataTable.beginSlice(ofs);
       dataTable.endSlice(ofs+pageSize);
-      $("#whiskey-count-begin").html(ofs + 1);
-      $("#whiskey-count-end").html(ofs + pageSize);
-      // display();
     });
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
   }

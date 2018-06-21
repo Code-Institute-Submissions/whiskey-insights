@@ -17,6 +17,15 @@
     margin-top: 10px;
 }
 
+@media (max-width:1023px) {
+    #my-navbar {
+        height: 150px;
+    }
+    #intro-text {
+        margin:0px 5px 0px 5px;
+    }
+}
+
 /* Main Container */
 
 #main-container {
@@ -95,11 +104,23 @@
     width: 100%;
 }
 
+@media (max-width:1024px) {
+    .center-chart-main {
+        width: 95%;
+    }
+}
+
 .center-chart {
     /*margin-top: 20px;*/
     /*display: flex;*/
     background-color: #ffeee6;
     height: 500px;
+}
+
+@media (max-width:768px) {
+    .center-chart {
+        height: 550px;
+    }
 }
 
 .scatter-plot {
@@ -111,8 +132,13 @@
 }
 
 .scatter-plot .extent {
-    color: #adc2eb;
     opacity: 0.3;
+}
+
+@media (max-width:411px) {
+    #table-and-pagination-container {
+        min-height: 950px;
+    }    
 }
 
 #table-and-pagination {
@@ -122,6 +148,12 @@
     padding: 10px;
     background-color: #ffeee6;
     height: 550px;
+}
+
+@media (max-width:411px) {
+    #table-and-pagination {
+        min-height: 945px;
+    }    
 }
 
 #table-container {
@@ -238,6 +270,14 @@ table {
     background-color: #cc4400;
     color: #ffffff;
 }
+
+/* MEDIA QUERIES */
+
+/* Phone */
+
+/* iPad */
+
+/* iPad Pro */
 
 /* Back to top button */
 
