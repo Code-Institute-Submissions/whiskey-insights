@@ -226,7 +226,7 @@ $(document).ready(function() {
   
   // Render chart
     dc.scatterPlot("#most-divisive-whiskeys")
-      .width(innerWidth/1.2)
+      .width(innerWidth/1.3)
       // .with(900)
       .height(300)
       .transitionDuration(500)
