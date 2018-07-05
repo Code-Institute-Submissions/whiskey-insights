@@ -370,8 +370,9 @@ $(document).ready(function() {
     // // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
     
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - START
-
-    $("#best-value-whiskeys-piechart").on("click", function() {
+  
+    $(".reset-chart").on("mouseup", function() {
+      
       alert("The function does something on click.");
       // dataTable.beginSlice(ofs);
       // dataTable.endSlice(ofs+pageSize);
@@ -379,6 +380,17 @@ $(document).ready(function() {
       update();
       dataTable.redraw();
     });
+    
+       $("#country-selector").on("mouseout", function() {
+      
+      alert("The function does something on double click.");
+      // dataTable.beginSlice(ofs);
+      // dataTable.endSlice(ofs+pageSize);
+      ofs = 0;
+      update();
+      dataTable.redraw();
+    });
+    
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
   }
 });
