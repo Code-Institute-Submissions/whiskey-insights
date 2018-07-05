@@ -373,7 +373,7 @@ $(document).ready(function() {
   
     $(".reset-chart").on("mouseup", function() {
       
-      alert("The function does something on click.");
+      // alert("The function does something on click.");
       // dataTable.beginSlice(ofs);
       // dataTable.endSlice(ofs+pageSize);
       ofs = 0;
@@ -381,14 +381,15 @@ $(document).ready(function() {
       dataTable.redraw();
     });
     
-       $("#country-selector").on("mouseout", function() {
-      
-      alert("The function does something on double click.");
+    $("#country-selector").on("click", function() {
+      $("#country-selector").on("click", function() {
+              // alert("The function does something on double click.");
       // dataTable.beginSlice(ofs);
       // dataTable.endSlice(ofs+pageSize);
       ofs = 0;
       update();
       dataTable.redraw();
+      });  
     });
     
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
