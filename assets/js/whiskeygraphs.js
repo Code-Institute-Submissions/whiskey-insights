@@ -1,7 +1,6 @@
 // PENDING - Get the legendText in the piechart to render correctly
 // PENDING - Fix pagination 
 // PENDING - Make charts responsive
-// PENDING - Why does the dataTable shows a lesser rated whiskey on the first row?
 
 $(document).ready(function() {
       // console.log( "ready!" );
@@ -83,15 +82,10 @@ $(document).ready(function() {
         return {count: 0, total: 0};
       }
     );
-    
-    // var minRating = 0;
-    // var maxRating = 10;
-    
   
     dc.barChart("#preferred-flavour-profile")
       .width(350)
       .height(300)
-      // .margins({top: 10, right: 50, bottom: 30, left: 50})
       .clipPadding(200)
       .colorAccessor(function (d) {
         return d.key;
@@ -109,9 +103,6 @@ $(document).ready(function() {
               return valueAverage.toFixed(2);
           }
       })
-      // .title(function (d) {
-      //     return " has a Cluster of " + d.key[0];
-      // })
       .transitionDuration(500)
       .x(d3.scale.ordinal())
       .xUnits(dc.units.ordinal)
@@ -211,9 +202,6 @@ $(document).ready(function() {
     // a stdev of at least 0.91, which was the lowest score among the top 25 
     
     var stdevDim = ndx.dimension(function(d) {
-      // if (d["STDEV"] >= 0.91) {
-      //   return [d["STDEV"], d["MetaCritic"], d["Whisky"]]; 
-      // }
       if (d["STDEV"] !== "n/a") {
         return [+d["STDEV"], +d["MetaCritic"], d["Whisky"]]; 
       }
@@ -259,32 +247,6 @@ $(document).ready(function() {
     var ofs = 0;
     var pageSize = 15;
     
-    // var totalPages = ndx.groupAll().reduce(
-    //   function (p, v) {
-    //           ++p.count;
-    //           p.total += v.MetaCritic;
-    //           p.average = p.total / p.count;
-    //           return p;
-    //       },
-    //       function (p, v) {
-    //           --p.count;
-    //           if(p.count == 0) {
-    //                 p.total = 0;
-    //                 p.average = 0;
-    //             } else {
-    //               p.total -= v.MetaCritic;
-    //               p.average = p.total / p.count;
-    //             }
-    //           return p;
-    //       },
-    //       function () { return {count:0,total:0,average:0}; }
-    // );
-
-    // I need a value that tells "Next" and "Last" not to go until the end if
-    // the filters give a lower number of samples to render in the table or if 
-    // I've moved from ofs 1 in my pagination
-    // var remainingTotalPages = totalPages - (pageSize-ofs);
-    
     // Define dimensions and groups for dataTable - START
     var whiskeyRatingDim = ndx.dimension(function(d) {
       if (["MetaCritic"] !== "n/a") {
@@ -306,16 +268,7 @@ $(document).ready(function() {
               return (+d);
           })
           .group(filteredTotal);
-          
-    //     // Trying to get the pagination to update when changing the filters - START
-    // $("#country-selector").on("click", function() {
-    //       $(".paging-btn").each(function() {
-    //         $(this).attr("disabled", false)
-    //       });
-    // });
-    // // Trying to get the pagination to update when changing the filters - END
-    
-    
+
     // Define display() function
     function display() {
       d3.select("#first").attr("disabled", ofs <= 0 ? "true" : null);
@@ -381,6 +334,7 @@ $(document).ready(function() {
     update();
     dataTable.render();
     
+    
     // Disable Effects update when changing the filters - START
     $("#first, #previous, #next, #last, #country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("click", function() {
       if (( ofs <= 0 ) && ( (ofs + pageSize) >= filteredTotal.value() )) {
@@ -407,10 +361,23 @@ $(document).ready(function() {
     });
     // Disable Effects update when changing the filters - END
     
+    // // Each time you select a new filter, the dataTable and pagination should go back to starting position - START
+    // $("#country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("change", function() {
+    //   alert("The paragraph was clicked.");
+    //   dataTable.beginSlice(ofs);
+    //   dataTable.endSlice(ofs+pageSize);
+    // });
+    // // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
+    
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - START
-    $("#country-selector, #showPreferredFlavourProfiles, #showMostDivisiveWhiskeys, #showWhiskeysPerPriceRange").on("click", function() {
-      dataTable.beginSlice(ofs);
-      dataTable.endSlice(ofs+pageSize);
+
+    $("#best-value-whiskeys-piechart").on("click", function() {
+      alert("The function does something on click.");
+      // dataTable.beginSlice(ofs);
+      // dataTable.endSlice(ofs+pageSize);
+      ofs = 0;
+      update();
+      dataTable.redraw();
     });
     // Each time you select a new filter, the dataTable and pagination should go back to starting position - END
   }

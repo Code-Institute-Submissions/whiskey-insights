@@ -275,7 +275,8 @@ table {
 
 @media (max-width:768px) {
     #world-map {
-        width: 80%;
+        width: 75%;
+        /*width: 600px;*/
     }
 }
 
@@ -295,7 +296,8 @@ table {
         width: 95%;
     }
     #world-map {
-        width: 90%;
+        width: 85%;
+        /*width: 750px;*/
     }
 }
 

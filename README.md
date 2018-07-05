@@ -27,6 +27,12 @@ For whiskey enthusiasts and people working in the whiskey industry.<br>
 ##### Mockup - 
 Planned to have five graphs as [shown in mockup](/assets/pre-production/mock-up-project-2.pdf)
 
+#### Note on Chrome Bug
+There is a bug in Google Chrome affecting the dataTable. It causes the first whiskey
+to be incorrectly place at the top of the list. The second whiskey is the one that
+actually should take the top position.
+This issue is inexistent on Mozilla.
+
 #### Sources 
 
 [NavBar Emoji](https://emojipedia.org/licensing/)
