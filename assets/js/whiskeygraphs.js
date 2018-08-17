@@ -50,7 +50,7 @@ $(document).ready(function() {
           dc.redrawAll();
           $(".paging-btn").each(function() {
             console.log($(this));
-            $(this).attr("disabled", false)
+            $(this).attr("disabled", false);
           });
     });
   }
@@ -317,7 +317,7 @@ $(document).ready(function() {
   
     // Render our data table
     
-    var dataTable = dc.dataTable("#value-table")
+    var dataTable = dc.dataTable("#value-table");
     
     dataTable
       .width(800)
@@ -355,7 +355,7 @@ $(document).ready(function() {
       }
       else {
         $(".paging-btn").each(function() {
-          $(this).attr("disabled", false)
+          $(this).attr("disabled", false);
         });
       }
     });
