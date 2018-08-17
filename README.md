@@ -5,26 +5,22 @@ Start Date: 31/05/18 <br>
 ### Your Project's Name
 Whiskey Insight
 
-### Description: Whiskey Insight - A tool to discover highly rated whiskeys 
-### at different price points
+### Description: Whiskey Insight - A tool to discover highly rated whiskeys at different price points
 
 #### Notes on UXD
 1. Strategy Plane<br>
 <em>What are you trying to achieve?</em>
 Being able to cross-reference the data from [whiskeyanalysis.com](http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/) in order to help users find the ideal bottle/s of whiskey to match their taste and budget.<br>
 <em>For whom?</em><br>
-For whiskey enthusiasts and people working in the whiskey industry.<br>
-<br>
+For whiskey enthusiasts and people working in the whiskey industry.
 2. Scope Plane<br>
 - Preproduction decisions: 31/05/18<br>
-- Create mockup: 31/05/18<br>
-<br>
+- Create mockup: 31/05/18
 3. Structure Plane<br>
 - Simple structure, all graphs displayed on one page
-<br>
 4. Skeleton Plane<br>
 - Build basic structure: 10/06/18<br>
-- Add content and basic design: 18/06/18<br>
+- Add content and basic design: 18/06/18
 5. Surface Plane<br>
 - Aim for a look and feel that evokes whiskey: use a colour palette with different shades of orange and brown.
 - Keep a classic style, adult and refined, with a touch of colour but overall elegant feeling.
@@ -34,7 +30,8 @@ For whiskey enthusiasts and people working in the whiskey industry.<br>
 Planned to have five graphs as [shown in mockup](/assets/pre-production/mock-up-project-2.pdf)
 
 #### Features
-As per the projects brief:<br>
+As per the projects brief:
+<br>
 **CREATE A DATA DASHBOARD**
 - Build a data dashboard that visualizes a dataset of your choice:<br>
 I used data from a CSV file by [whiskeyanalysis.com](http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/)<br>
@@ -44,9 +41,7 @@ to allow users find the top rated whiskeys after applying a series of filters.
 the map with bubbles was based on **dataMap**, I also used a **selectMenu** for the country selection,<br>
 a **barChart** for the flavour profile preferences, a **pieChart** for the price ranges, a **scatterPlot** <br>
 to display the standard deviation (in relation to whiskey's ratings), and finally, a **dataTable** to render the result organisedly.<br>
-
 <br>
-
 
 #### Technologies Used
 
@@ -66,7 +61,7 @@ This issue is inexistent on Mozilla.
 sometimes, the bubbles won't render. Just refresh the page.
 
 
-### Testing
+#### Testing
 
 Manual testing included frequent use of the Developer Tools to adjust style to different screens.</br>
 Manual clicking and confirmation that the links work as expected.</br>
@@ -79,7 +74,7 @@ Acting as a user, the following actions were undertaken as manual tests:
 - Clicking on the pagination: Tried to push beyond the number of available pages,<br>
 tried to see if it would restart in unexpected positions after reseting or changing the filters.<br>
 
-### Deployment
+#### Deployment
 
 This project was deployed on GitHub Pages.
 
