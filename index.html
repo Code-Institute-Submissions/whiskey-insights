@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/d3.min.js"></script>
-    <script type="text/javascript" src="assets/js/topojson.min.js"></script>
-    <script type="text/javascript" src="assets/js/datamaps.world.min.js"></script>
-    <script type="text/javascript" src="assets/js/crossfilter.min.js"></script>
-    <script type="text/javascript" src="assets/js/dc.min.js"></script>
-    <script type="text/javascript" src="assets/js/queue.min.js"></script>
-    <script type="text/javascript" src="assets/js/effects.js"></script>
-    <script type="text/javascript" src="assets/js/whiskeygraphs.js"></script>
-    <script type="text/javascript" src="assets/js/bubblemap.js"></script>
+    <script src="assets/js/d3.min.js"></script>
+    <script src="assets/js/topojson.min.js"></script>
+    <script src="assets/js/datamaps.world.min.js"></script>
+    <script src="assets/js/crossfilter.min.js"></script>
+    <script src="assets/js/dc.min.js"></script>
+    <script src="assets/js/queue.min.js"></script>
+    <script src="assets/js/effects.js"></script>
+    <script src="assets/js/whiskeygraphs.js"></script>
+    <script src="assets/js/bubblemap.js"></script>
 
 </head>
 
@@ -51,7 +51,7 @@
             some of the best bottles from around the world, while providing 
             helpful insights for those involved in the whiskey industry.</h4>
             <p>The graphs were possible thanks to data collected from 
-            <a href="http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/">
+            <a href="http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/" target="_blank">
                 whiskeyanalysis.com</a>, "a scientific meta-analysis of whisky flavours and quality."</p>
         </div>
 
@@ -86,8 +86,8 @@
         <div class="row center-chart-main">
             <!-- The bar chart goes here -->
             <div class="col-sm-6 col-xs-12 center-chart">
-                <h3>Preferred Flavour Profile - 
-                <span><!-- Trigger/Open The Modal -->
+                <h3>Preferred Flavour Profile - </h3>
+                <div><!-- Trigger/Open The Modal -->
                 <button id="clustersBtn">Clusters' Meaning</button>
                 <!-- The Modal -->
                 <div id="clustersModal" class="modal">
@@ -105,15 +105,15 @@
                         <p><span class="modal-initial">I</span> – Medium-bodied, medium-sweet, quite smoky – with some medicinal notes and spicy, fruity and nutty notes</p>
                         <p><span class="modal-initial">J</span> – Full-bodied, dry, very smoky, pungent – with medicinal notes and some  spicy, malty and fruity notes</p>
                         <p><span class="modal-initial">R0</span> – (r = 0%) – “No Rye” whisky with 0 rye gain</p>
-                        <p><span class="modal-initial">R1</span> – (r <= 10%) – “Low Rye” whisky of 10% or less rye grain</p>
-                        <p><span class="modal-initial">R2</span> – (10% < r < =15%) – “Standard Rye” whisky of 10-15% rye grain</p>
-                        <p><span class="modal-initial">R3</span> – (15% < r < 51%) – “High Rye” whisky of more 15% rye</p>
-                        <p><span class="modal-initial">R4</span> – (r >= 51%) – “Rye” whisky of more than 51% rye</p>
+                        <p><span class="modal-initial">R1</span> – (r &lt;= 10%) – “Low Rye” whisky of 10% or less rye grain</p>
+                        <p><span class="modal-initial">R2</span> – (10% &lt; r &lt; =15%) – “Standard Rye” whisky of 10-15% rye grain</p>
+                        <p><span class="modal-initial">R3</span> – (15% &lt; r &lt; 51%) – “High Rye” whisky of more 15% rye</p>
+                        <p><span class="modal-initial">R4</span> – (r &lt;= 51%) – “Rye” whisky of more than 51% rye</p>
                         <p>For fuller descriptions and examples belonging to each cluster visit 
                         <a href="http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/" target="_blank">whiskeyanalysis.com</a></p>
                     </div>
-                </div></span>
-                </h3>
+                </div></div>
+                
                 <p>Average rating of the different flavour profiles separated in the data (when available).
                 Each bar corresponds with one of the different "Clusters" or characteristics of a whiskey. 
                 For Bourbon and Bourbon-like whiskeys (R0 to R4), classification was based on rye content.</p>
@@ -133,7 +133,7 @@
         <div class="center-chart-main">
             <div class="row scatter-plot">
                 <h3>Love 'em or Hate 'em - Most Divisive Whiskeys</h3>
-                    <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.</br>
+                    <p>Using the standard deviation, we can see which whiskeys got the widest range of ratings when reviewed.<br>
                         This shows that there's less consensus on their final score.</p>
                 <div id="most-divisive-whiskeys" class="reset-chart"></div>
             </div>
