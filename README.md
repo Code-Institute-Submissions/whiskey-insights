@@ -9,10 +9,9 @@ Whiskey Insight
 
 #### Notes on UXD
 1. Strategy Plane<br>
-<em>What are you trying to achieve?</em>
-Being able to cross-reference the data from [whiskeyanalysis.com](http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/) in order to help users find the ideal bottle/s of whiskey to match their taste and budget.<br>
-<em>For whom?</em><br>
-For whiskey enthusiasts and people working in the whiskey industry.
+- <em>What are you trying to achieve?</em>
+- Being able to cross-reference the data from [whiskeyanalysis.com](http://whiskyanalysis.com/index.php/interesting-correlations/how-to-read-the-database/) in order to help users find the ideal bottle/s of whiskey to match their taste and budget.<br>
+- <em>For whom?</em>: For whiskey enthusiasts and people working in the whiskey industry.
 2. Scope Plane<br>
 - Preproduction decisions: 31/05/18<br>
 - Create mockup: 31/05/18
